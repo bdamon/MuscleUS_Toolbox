@@ -1,7 +1,7 @@
 function [apo_vector, tract_vector, penn_mean, curvature_mean, curvature_all] = fiber_quantifier_us(fiber_all_mm, roi_struc, image_info_struc)
-% [apo_vector, tract_vector, penn_mean, curvature_mean, curvature_all] = fiber_quantifier_us(fiber_all_mm, roi_struc, image_info_struc)
 
-%% calculate the pennation angle
+
+%% calculate pennation angle
 num_tracts = length(fiber_all_mm(:,1,1));
 apo_vector = zeros(num_tracts,2);
 tract_vector = zeros(num_tracts,2);
@@ -60,5 +60,5 @@ for track_cntr = 2:(num_tracts-1)
     curvature_mean(track_cntr) = mean(nonzeros(curvature_all(track_cntr,:)));
 end
 
-%% end function
+%%
 return;
