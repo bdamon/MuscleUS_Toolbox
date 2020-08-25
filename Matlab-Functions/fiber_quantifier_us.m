@@ -60,5 +60,5 @@ for track_cntr = 2:(num_tracts-1)
     curvature_mean(track_cntr) = mean(nonzeros(curvature_all(track_cntr,:)));
 end
 
-%%
+%% end function
 return;
