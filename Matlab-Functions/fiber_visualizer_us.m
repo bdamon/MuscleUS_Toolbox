@@ -1,6 +1,7 @@
-function fiber_visualizer_us(image_doub, fiber_all, roi_struc)
+function fiber_figure = fiber_visualizer_us(image_doub, fiber_all, roi_struc)
+% fiber_figure = fiber_visualizer_us(image_doub, fiber_all, roi_struc)
 
-%%
+%% 
 figure('units', 'normalized', 'position', [0.1 .1 .8 .75])
 imagesc(image_doub), colormap gray
 axis image
@@ -24,5 +25,5 @@ if nargin>1
 end
 
 
-%% end function
+%% return
 return;
