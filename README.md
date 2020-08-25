@@ -10,7 +10,7 @@ The MuscleUS_Toolbox consists of a series of custom-written Matlab functions for
   6) [Links to other resources in the toolbox and online](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#6-other-resources)
 
 ## 1. Acknowledgements
-The functions in this toolbox reflect the collective contributions of many individuals over many years, including: Adam Anderson, Crystal Coolbaugh, Bruce Damon, Zhaohua Ding, Hannah Kilpatrick, and Melissa Hooijmans. Details regarding authorship and individual contributions are noted in each function.
+The functions in this toolbox reflect the collective contributions of many individuals over many years, including: Emily Bush, Crystal Coolbaugh, Bruce Damon, Zhaohua Ding, Hannah Kilpatrick, and Ke Li. Details regarding authorship and individual contributions are noted in each function.
 
 This work was supported by NIH grant NIH/NIAMS R01 AR073831. By using this software, users agree to acknowledge the active grant (NIH/NIAMS R01 AR073831) in presentations and publications and to adhere to NIH policies regarding open access to their publications. 
 
@@ -24,13 +24,6 @@ The functions have been tested using MATLAB v. 2019b.  The toolbox consists prim
   * List
 
 ## 5. Overview of a Typical Workflow
-The figure below provides an overview of processing using the MuscleDTI_Toolbox: 
-
-<img src="https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Images/Overview.png" 
-alt="MuscleDTI_Toolbox Overview" width="600" height="413" border="10">
-
-These steps are elucidated further below.
-
 ### A. Open the image
 
 ### B. Define muscle boundaries and the aponeurosis using the function <i>define_muscleroi_us</i>
