@@ -1,17 +1,25 @@
 function [Lambda1,Lambda2,Ix,Iy]=eig2image(Dxx,Dxy,Dyy)
-% This function eig2image calculates the eigen values from the
-% hessian matrix, sorted by abs value. And gives the direction
-% of the ridge (eigenvector smallest eigenvalue) .
 % 
-% [Lambda1,Lambda2,Ix,Iy]=eig2image(Dxx,Dxy,Dyy)
+%FUNCTION eig2image
+%  [Lambda1,Lambda2,Ix,Iy]=eig2image(Dxx,Dxy,Dyy)
 %
+% USAGE
+%  This function eig2image calculates the eigenvalues from the Hessian matrix: 
+% 
+%  | Dxx  Dxy |
+%  |          |
+%  | Dxy  Dyy |
 %
-% | Dxx  Dxy |
-% |          |
-% | Dxy  Dyy |
-% Downloaded from 
-% http://www.mathworks.com/matlabcentral/fileexchange/24409-hessian-based-frangi-vesselness-filter
-% Ke Li, 2012-06-19
+%  sorted by abs value, and gives the direction of the ridge (eigenvector
+%  smallest eigenvalue).
+%  
+%  The user does not interact with this function.  It is called by
+%  bmode2angle_us.
+%
+% ACKNOWLEDGEMENTS
+%  Downloaded from 
+%  http://www.mathworks.com/matlabcentral/fileexchange/24409-hessian-based-frangi-vesselness-filter
+%  by Ke Li, 2012-06-19
 
 % Compute the eigenvectors of J, v1 and v2
 tmp = sqrt((Dxx - Dyy).^2 + 4*Dxy.^2);
@@ -39,7 +47,5 @@ Lambda2=mu2; Lambda2(check)=mu1(check);
 Ix=v1x; Ix(check)=v2x(check);
 Iy=v1y; Iy(check)=v2y(check);
 end
-
-
 
 
