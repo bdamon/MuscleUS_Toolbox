@@ -9,10 +9,10 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %  the image mask defined the region of interest, and a structure
 %  containing options for estimating the fascicle orientations. The
 %  fascicle orientations are estimated using the algorithm presented by Rana
-%  (J Biomech, 42:2068,2009), in which the images are processed using 
+%  et al., (J Biomech, 42:2068,2009), in which the images are processed using 
 %    -A series of Gaussian blurring steps of varying sizes  
-%    -The vesselness response is calculated 
-%    -The Hessian matrix of the vesselness response is calculated
+%    -Calculation of the vesselness response of the structures
+%    -Calculation of the Hessian matrix of the vesselness response 
 %    -An anisotropic wavelet is convolved with the image at a range of
 %     orientations
 %    -The angle at which the maximum convolution of the wavelet with the image
