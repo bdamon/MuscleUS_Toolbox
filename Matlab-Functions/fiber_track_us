@@ -1,6 +1,4 @@
 function [fiber_all_pixels, stop_list, angle_all] = fiber_track_us(vector_image, roi_struc, mask, ft_options, image_doub)
-%
-%[fiber_all_pixels, stop_list, angle_all] = fiber_track_us(vector_image, roi_struc, mask, ft_options, image_doub)
 
 %% Get options from ft_options
 
