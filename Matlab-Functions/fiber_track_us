@@ -73,7 +73,7 @@ for track_cntr = 1:num_fibers
     while 1
         
         %calculate next point
-        step_dir = squeeze(vector_image(row_point, col_point,:))
+        step_dir = squeeze(vector_image(row_point, col_point,:));
         next_point = squeeze(fiber_all_pixels(track_cntr, fiber_cntr-1,:)) + ...
             step_incr*step_dir;
         row_point = round(next_point(1));
@@ -110,7 +110,7 @@ for track_cntr = 1:num_fibers
             fiber_all_pixels(track_cntr, fiber_cntr,:) = next_point;
             
             %prepare for next time through the loop
-            step_dir_old = step_dir
+            step_dir_old = step_dir;
             fiber_cntr = fiber_cntr + 1;
             
         end
