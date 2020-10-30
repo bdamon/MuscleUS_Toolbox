@@ -9,7 +9,7 @@ function [apo_vector, tract_vector, penn_mean, curvature_mean, curvature_all] = 
 %  architectural parameters fiber tract length, pennation angle, and
 %  curvature in the MuscleUS_Toolbox.
 
-%% calculate pennation angle
+%% calculate pennation angle 
 num_tracts = length(fiber_all_mm(:,1,1));
 apo_vector = zeros(num_tracts,2);
 tract_vector = zeros(num_tracts,2);
