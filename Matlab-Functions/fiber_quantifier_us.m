@@ -1,5 +1,13 @@
 function [apo_vector, tract_vector, penn_mean, curvature_mean, curvature_all] = fiber_quantifier_us(fiber_all_mm, roi_struc, image_info_struc)
-
+%
+% FUNCTION fiber_quantifier_us
+%  [apo_vector, tract_vector, penn_mean, curvature_mean, curvature_all] =
+%  fiber_quantifier_us(fiber_all_mm, roi_struc, image_info_struc);
+%
+% USAGE
+%  The function fiber_quantifier_us is used to calculate the muscle
+%  architectural parameters fiber tract length, pennation angle, and
+%  curvature in the MuscleUS_Toolbox.
 
 %% calculate pennation angle
 num_tracts = length(fiber_all_mm(:,1,1));
@@ -26,6 +34,9 @@ for track_cntr = 2:(num_tracts-1)
     apo_vector(track_cntr,1:2) = apo_vector(track_cntr,1:2)/norm(apo_vector(track_cntr,1:2));
     tract_vector(track_cntr, 1:2) = [(loop_track_mm(index_5mm,2) - loop_track_mm(1,2)) (loop_track_mm(index_5mm,1) - loop_track_mm(1,1))];
     tract_vector(track_cntr,1:2) = tract_vector(track_cntr,1:2)/norm(tract_vector(track_cntr,1:2));
+    if tract_vector(track_cntr,2)<0 && apo_vector(track_cntr,2)>0 || tract_vector(track_cntr,2)>0 && apo_vector(track_cntr,2)<0
+        tract_vector = -tract_vector;
+    end
     
     penn_mean(track_cntr) = real(acosd(dot(apo_vector(track_cntr,1:2),tract_vector(track_cntr,1:2))));
     
