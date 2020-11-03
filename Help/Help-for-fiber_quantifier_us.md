@@ -3,11 +3,11 @@
 ## Introduction
 
 This help file contains information about
-1) [Purpose of the program](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#1-purpose)
-2) [Usage of the program](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#2-usage)
-3) [Syntax](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#3-Syntax)
-4) [Example Code](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#4-Example-Code)
-5) [Acknowledgements](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#5-Acknowledgements)
+1) [Purpose of the program](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#1-purpose)
+2) [Usage of the program](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#2-usage)
+3) [Syntax](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#3-Syntax)
+4) [Example Code](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#4-Example-Code)
+5) [Acknowledgements](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md#5-Acknowledgements)
 
 ## 1. Purpose
  
