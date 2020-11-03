@@ -35,7 +35,7 @@ The input arguments are:
 
 * <i>fs_options</i>: A structure containing the following fields:
 
-  <i>.interp_distance</i>: An interpolation interval for the fitted fiber tracts, in units of mm.  For example, setting interp_distance to 0.25 would interpolate the fiber tract at intervals of 0.25 mm. Prior to fitting the pixel positions, interp_distance is converted to units of pixels.
+  <i>.interp_distance</i>: An interpolation interval for the fitted fiber tracts, in units of mm.  For example, setting <i>interp_distance</i> to 0.25 would interpolate the fiber tract at intervals of 0.25 mm. Prior to fitting the pixel positions, <i>interp_distance</i> is converted to units of pixels.
   
   <i>.poly_order</i>: A 2-element vector containing the polynomial orders, [N<sub>R</sub> N<sub>C</sub>], to use when fitting the tracts
 
@@ -47,7 +47,7 @@ The output arguments are:
 
 * <i>coeff_c_pixels, coeff_x_mm</i>: Matrices of the N<sup>th</sup> order polynomial coefficients for the tracts' column/X positions, with units of pixels and mm, respectively
 
-* <i>coeff_r_pixels, coeff_y_mm</i>: Matrices of the Nth order polynomial coefficients for the tracts' row/Y positions, with units of pixels and mm, respectively
+* <i>coeff_r_pixels, coeff_y_mm</i>: Matrices of the N<sup>th</sup> order polynomial coefficients for the tracts' row/Y positions, with units of pixels and mm, respectively
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_smoother_us.md)
 
