@@ -1,51 +1,74 @@
 function [penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quantifier_us(fiber_all_mm, roi_struc, image_info_struc)
 %
-% FUNCTION fiber_quantifier_us
-%   [apo_vector, tract_vector, penn_mean, curvature_mean, curvature_all] =
-%   fiber_quantifier_us(fiber_all_mm, roi_struc, image_info_struc);
+%FUNCTION fiber_quantifier_us
+%  [penn_mean, tract_lengths, curvature_mean, curvature_all] = ...
+%    fiber_quantifier_us(fiber_all_mm, roi_struc, image_info_struc);
 %
-% USAGE
-%   The function fiber_quantifier_us is used to calculate the muscle
-%   architectural parameters fiber tract length, pennation angle, and
-%   curvature in the MuscleUS_Toolbox.
+%USAGE
+%  The function fiber_quantifier_us is used to calculate the muscle
+%  architectural parameters fiber tract length, pennation angle, and
+%  curvature in the MuscleUS_Toolbox.
 %
-%   The user inputs a mastrix containing fiber tract positions, specified in
-%   units of mm; a structure containing information about the seeding region
-%   of interest; and a structure containing image metadata. Computations are
-%   made automatically;the length of the full tract, pennation angle over the
-%   first 5 mm, and curvature at each point are calculated.  The function
-%   outputs vectors containing the fiber tract lengths, pennation angles,
-%   and mean curvatures and a matrix containing the point-wise curvature
-%   values.
+%  The user inputs a mastrix containing fiber tract positions, specified in
+%  units of mm; a structure containing information about the seeding region
+%  of interest; and a structure containing image metadata. Computations are
+%  made automatically; the length of the full tract, pennation angle over the
+%  first 5 mm, and curvature at each point are calculated.  The procedures
+%  for each calculation are:
+%    -Fiber tract length: This is measured by summing the inter-point 
+%     distances along the tract.
+%
+%    -Pennation: For each fiber tract, position vectors are formed along the
+%     local segment of the aponeurosis and the first 5 mm of the tract.
+%     Each position vector is converted to unit length.  The pennation
+%     angle is calculated as the inverse cosine of the dot product of the
+%     two vectors.
 % 
-% INPUT ARGUMENTS
-%   fiber_all_mm: A matrix containing the fiber tract points, having units
-%   of mm
-%
-%   roi_struc: A structure containing information about the aponeurosis ROI,
-%   output from define_muscleroi_us
-%
-%   image_info_struc: A structure containing image metadata, output from
-%   read_dicom_us
-%
-% OUTPUT ARGUMENTS: 
-%   penn_mean: a Vector containing the pennation angle of each tract, in
-%   degrees
+%    -Curvature: The method for curvature measurements is adapted from Damon 
+%     et al, Magn Reson Imaging 2012. Briefly, these use a discrete 
+%     implementation of the Frenet-Serret equations. Specifically, the 
+%     curvature K is defined in
+%       dT/ds = K N
+%     where T is the tangent line to points along the curve, s is the step 
+%     length between points, and N is the normal vector. In fiber_quantifier_us, 
+%     K is calculated by multiplying each side of this equation by the Moore-
+%     Penrose pseudoinverse matrix of N.
 % 
-%   tract_lengths: A vector containing the fiber tract lengths, in mm
-% 
-%   curvature_mean: A vector containing the mean curvature of each tract, in
-%   mm^-1
+%     For curvature, the best results are obtained with polynomial-fitted 
+%     fiber tracts, calculated using fibersmoother_us. 
 %
-%   curvature_all: A matrix containing the point-wise curvature values, in
-%   mm^-1
+%  The function outputs vectors containing the fiber tract lengths, pennation
+%  angles, and mean curvatures and a matrix containing the point-wise curvature
+%  values.
 %
-% VERSION INFORMATION
-%  v. 0.1
+%INPUT ARGUMENTS
+%  fiber_all_mm: A matrix containing the fiber tract points, having units
+%  of mm
 %
-% ACKNOWLEDGEMENTS
-%  People: Bruce Damon, Hannah Kilpatrick
-%  Grant support: NIH/NIAMS R01 AR073831
+%  roi_struc: A structure containing information about the aponeurosis ROI,
+%  output from define_muscleroi_us
+%
+%  image_info_struc: A structure containing image metadata, output from
+%  read_dicom_us
+%
+%OUTPUT ARGUMENTS: 
+%  penn_mean: a Vector containing the pennation angle of each tract, in
+%  degrees
+%
+%  tract_lengths: A vector containing the fiber tract lengths, in mm
+%
+%  curvature_mean: A vector containing the mean curvature of each tract, in
+%  mm^-1
+%
+%  curvature_all: A matrix containing the point-wise curvature values, in
+%  mm^-1
+%
+%VERSION INFORMATION
+% v. 0.1
+%
+%ACKNOWLEDGEMENTS
+% People: Bruce Damon, Hannah Kilpatrick
+% Grant support: NIH/NIAMS R01 AR073831
 
 %% calculate architectural parameters for each tract
 
