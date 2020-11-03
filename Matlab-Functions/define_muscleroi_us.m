@@ -18,32 +18,33 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %  After each step, the user can inspect and verify these definitions.
 %
 %INPUT ARGUMENT
-%  image_data_struc: The output of read_US.
+%  image_data_struc: A structure containing the imaging data, output from 
+%   read_dicom_us
 %
-%  image_info_struc: The output of read_US
+%  image_info_struc: A structure containing the imaging metadata, output from 
+%   read_dicom_us
 %
 %  dmr_options: A structure containing the following fields:
-%   -roi_resolution: The desired distance between fiber tracking seed  
-%    points, in mm
-%   -frame_num: The frame number within the image data to be analyzed.  If
-%    not specified, the first frame is used.
+%    -roi_resolution: The desired distance between fiber tracking seed  
+%     points, in mm
+%    -frame_num: The frame number within the image data to be analyzed.  If
+%     not specified, the first frame is used.
 %
 %OUTPUT ARGUMENTS
 %  image_data_struc: The input structure, plus the following additional
-%  fields:
-%   -mask: A binary image mask defining the muscle of interest
-%   -masked_gray: The mask applied to the grayscale images.
+%   fields:
+%    -mask: A binary image mask defining the muscle of interest
+%    -masked_gray: The mask applied to the grayscale images.
 %
 %  roi_struc: A structure with information about the seed surface ROI,
-%  containing the following fields:
-%   -roi_x_points: The selected X points
-%   -roi_y_points: The selected Y points
-%   -fitted_x_points: The fitted X points
-%   -fitted_y_points: The fitted Y points
-%   -roi_resolution: The distance between fiber tracking points
-%   -roi_points_params: The fitted parameters for pixel locations in the
-%    ROI
-%   -roi_distance_
+%   containing the following fields:
+%    -roi_x_points: The selected X points
+%    -roi_y_points: The selected Y points
+%    -fitted_x_points: The fitted X points
+%    -fitted_y_points: The fitted Y points
+%    -roi_resolution: The distance between fiber tracking points
+%    -roi_points_params: The fitted parameters for pixel locations in the
+%     ROI
 %
 %VERSION INFORMATION
 %  v. 0.1
