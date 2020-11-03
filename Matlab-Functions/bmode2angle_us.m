@@ -1,12 +1,12 @@
 function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_doub, mask, b2a_options)
 %
-%FUNCTION define_muscle_roi
+%FUNCTION bmode2angle_us
 %  [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_doub, mask, b2a_options)
 %
 %USAGE
 %  The function bmode2angle_us is used to estimate muscle fascicle
 %  orientations in the MuscleUS_Toolbox. The user provides a b-mode image,
-%  the image mask defined the region of interest, and a structure
+%  the mask defining the region of interest in the image, and a structure
 %  containing options for estimating the fascicle orientations. The
 %  fascicle orientations are estimated using the algorithm presented by Rana
 %  et al., (J Biomech, 42:2068,2009), in which the images are processed using 
