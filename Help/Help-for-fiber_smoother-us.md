@@ -33,17 +33,48 @@ The input arguments are:
 
 * <i>image_info_struc</i>: A structure containing image metadata, output from [<i>read_dicom_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md)
 
-* image_info_struc: A structure containing image metadata, output from read_dicom_us
+* <i>fs_options</i>: A structure containing the following fields:
+  <i>.interp_distance</i>: An interpolation interval for the fitted fiber tracts, in units of mm.  For example, setting interp_distance to 0.25 would interpolate the fiber tract at intervals of 0.25 mm. Prior to fitting the pixel positions, interp_distance is converted to units of pixels.
+  
+  <i>.poly_order</i>: A 2-element vector containing the polynomial orders, [N<sub>R</sub> N<sub>C</sub>], to use when fitting the tracts
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
+The output arguments are:
+
+* <i>smoothed_fiber_all_pixels, smoothed_fiber_all_mm</i>: The fiber tracts following N<sup>th<sup> order polynomial fitting, with units of pixels and mm, respectively
+
+* <i>coeff_c_pixels, coeff_x_mm</i>: Matrices of the N<sup>th<sup> order polynomial coefficients for the tracts' column/X positions, with units of pixels and mm, respectively
+
+* <i>coeff_r_pixels, coeff_y_mm</i>: Matrices of the Nth order polynomial coefficients for the tracts' row/Y positions, with units of pixels and mm, respectively
+
+* <i>image_doub, roi_struc</i> (optional): The double-precision image and a structure containing information about the aponeurosis surface. If included, <i>fiber_visualizer_us</i> is automatically called so that the smoothed tracts can be visualized.
+
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_smoother_us.md)
 
 ## 4. Example Code
-The code below will measure fiber tract length, pennation angle, and curvature in polynomial-fitted fiber tracts
+### Example 1:
+The code below will measure fit the tracts' {row column} and {X Y} positions to 2<sup>nd</sup>-order polynomial functions, as functions of distance along the tract, and interpolate the fitted tracts at intervals of 0.25 mm:
+
+%% set options:
+fs_options.interp_distance=0.25;
+fs_options.poly_order=[2 2];
 
 %% call the function:
 
-[penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quantifier_us(smoothed_fiber_all_mm, roi_struc, image_info_struc);
+[smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
+  fiber_smoother_us(fiber_all, image_info_struc, fs_options, [], []);
+  
+### Example 2:
+The code below will measure fit the tracts' {row column} and {X Y} positions to 2<sup>nd</sup>-order polynomial functions, as functions of distance along the tract, and interpolate the fitted tracts at intervals of 0.5 mm, and allow the fitted tracts to be displayed:
 
+%% set options:
+fs_options.interp_distance=0.25;
+fs_options.poly_order=[2 2];
+
+%% call the function:
+
+[smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
+  fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_doub, roi_struc);
+  
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
 
 ## 5. Acknowledgements
