@@ -44,7 +44,7 @@ The input arguments are:
 
 * image_info_struc: A structure containing image metadata, output from read_dicom_us
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier.md)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
 
 ## 4. Example Code
 The code below will measure fiber tract length, pennation angle, and curvature in polynomial-fitted fiber tracts
