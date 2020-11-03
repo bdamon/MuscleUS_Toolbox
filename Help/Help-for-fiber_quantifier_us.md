@@ -11,7 +11,7 @@ This help file contains information about
 
 ## 1. Purpose
  
-The function <i>fiber_quantifier_us</i> The function fiber_quantifier_us is used to calculate the muscle architectural parameters fiber tract length, pennation angle, and curvature in the MuscleUS_Toolbox.
+The function <i>fiber_quantifier_us</i> is used to calculate the muscle architectural parameters fiber tract length, pennation angle, and curvature in the MuscleUS_Toolbox.
 
 [Back to the top](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
 
