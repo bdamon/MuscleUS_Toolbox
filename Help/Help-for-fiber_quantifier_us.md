@@ -13,7 +13,7 @@ This help file contains information about
  
 The function <i>fiber_quantifier_us</i> is used to calculate the muscle architectural parameters fiber tract length, pennation angle, and curvature in the MuscleUS_Toolbox.
 
-[Back to the top](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
 
 ## 2. Usage
 Calculations are only made for fiber tracts having length >= 5 mm. Information about each measurement follows:
@@ -30,7 +30,7 @@ Calculations are only made for fiber tracts having length >= 5 mm. Information a
 
 For curvature, the best results are obtained with polynomial-fitted fiber tracts, calculated using <i>fiber_fitter</i>. Fiber tract length and pennation angle are unaffected by polynomial fitting.
 
-[Back to the top](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
 
 ## 3. Syntax
 
@@ -38,13 +38,13 @@ For curvature, the best results are obtained with polynomial-fitted fiber tracts
 
 The input arguments are:
  
-* <i>fiber_all_mm</i>: A 4D matrix containing the fiber tract points, with units of mm. This matrix could be substituted with smoothed_fiber_all_mm (the output of [<i>fiber_smoother_us</i>](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_smoother_us.md))
+* <i>fiber_all_mm</i>: A 4D matrix containing the fiber tract points, with units of mm. This matrix could be substituted with smoothed_fiber_all_mm (the output of [<i>fiber_smoother_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_smoother_us.md))
 
 * roi_struc: A structure containing information about the aponeurosis ROI, output from define_muscleroi_us
 
 * image_info_struc: A structure containing image metadata, output from read_dicom_us
 
-[Back to the top](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier.md)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier.md)
 
 ## 4. Example Code
 The code below will measure fiber tract length, pennation angle, and curvature in polynomial-fitted fiber tracts
@@ -53,11 +53,11 @@ The code below will measure fiber tract length, pennation angle, and curvature i
 
 [penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quantifier_us(smoothed_fiber_all_mm, roi_struc, image_info_struc);
 
-[Back to the top](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
 
 ## 5. Acknowledgements
  People: Bruce Damon, Hannah Kilpatrick
  
  Grant support: NIH/NIAMS R01 AR073831
 
-[Back to the top](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md)
