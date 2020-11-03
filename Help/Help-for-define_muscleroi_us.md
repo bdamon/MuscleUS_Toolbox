@@ -5,10 +5,9 @@
 This help file contains information about
 1) [Purpose of the Program](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#1-purpose)
 2) [Usage of the Program](https://github.com/bdamon/MuscleDTI_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#2-usage)
-3) [Automated Segmentation Algorithm](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#3-Automated-Segmentation-Algorithm)
-4) [Syntax](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#4-Syntax)
-5) [Example Code](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#5-Example-Code)
-6) [Acknowledgements](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#6-Acknowledgements)
+3) [Syntax](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#3-Syntax)
+5) [Example Code](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#4-Example-Code)
+6) [Acknowledgements](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md#5-Acknowledgements)
 
 
 ## 1. Purpose
@@ -29,14 +28,7 @@ The mesh may be viewed using [<i>fiber_visualizer</i>](https://github.com/bdamon
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md)
 
-## 3. Automated Segmentation Algorithm
-In the first slice analyzed, the muscle mask is eroded (boundary pixels are removed) and then multiplied by the <i>anat_image</i> slice.  This reduces the anatomical image slice so that it includes only the pixels inside of the muscle of interest. Then, a k-means clustering algorithm is used to segment the remaining image data into three clusters.  The cluster corresponding to the highest signal intensities is assumed to represent the muscle.  The other clusters are presented to the user as the initial estimate of the aponeurosis’s location. The edge pixels are found and a Savitsky-Golay filter is used to form a smoothed curve that indicates the location of the roi_mesh points for that slice.  The user can correct pixel locations, as described above; the roi_mesh points are automatically updated.
-
-In subsequent slices, additional information is incorporated into the initial estimate, including the preceding aponeurosis segmentation and the results of an edge detection within the muscle mask.  These images are combined using the weights [1, 1, 2] for the k-means, edge, and preceding regions, respectively; voxels with sums greater than 2 are included in the initial estimate. The supervision and manual correction steps occur as described above.
-
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md)
-
-## 4. Syntax
+## 3. Syntax
 The function define_roi is called using the following syntax:
 
 roi_mesh = define_roi(anat_image, mask, dr_options, fv_options);
@@ -62,7 +54,7 @@ The output argument is:
    
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md)
 
-## 5. Example Code
+## 4. Example Code
 
 ### Example 1
 Given 
@@ -150,7 +142,7 @@ roi_mesh = define_roi(anat_image, mask, dr_options, plot_options);
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md)
 
-## 6. Acknowledgements
+## 5. Acknowledgements
 People: Bruce Damon, Hannah Kilpatrick
 
 Grants: NIH/NIAMS R01 AR050101, NIH/NIAMS R01 AR073831
