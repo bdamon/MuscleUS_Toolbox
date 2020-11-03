@@ -43,9 +43,9 @@ The input arguments are:
 
 The output arguments are:
 
-* <i>smoothed_fiber_all_pixels, smoothed_fiber_all_mm</i>: The fiber tracts following N<sup>th<sup> order polynomial fitting, with units of pixels and mm, respectively
+* <i>smoothed_fiber_all_pixels, smoothed_fiber_all_mm</i>: The fiber tracts following N<sup>th</sup> order polynomial fitting, with units of pixels and mm, respectively
 
-* <i>coeff_c_pixels, coeff_x_mm</i>: Matrices of the N<sup>th<sup> order polynomial coefficients for the tracts' column/X positions, with units of pixels and mm, respectively
+* <i>coeff_c_pixels, coeff_x_mm</i>: Matrices of the N<sup>th</sup> order polynomial coefficients for the tracts' column/X positions, with units of pixels and mm, respectively
 
 * <i>coeff_r_pixels, coeff_y_mm</i>: Matrices of the Nth order polynomial coefficients for the tracts' row/Y positions, with units of pixels and mm, respectively
 
