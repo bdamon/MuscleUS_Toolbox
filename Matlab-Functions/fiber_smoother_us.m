@@ -62,7 +62,7 @@ function [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coef
 %% get options
 poly_order = fs_options.poly_order;
 interp_distance = fs_options.interp_distance;
-interp_pixels = interp_distance/image_info_struc.PixelSpacing(1);
+interp_pixels = interp_distance/image_info_struc.PixelSpacingX;
 
 %% 
 coeff_c_pixels = zeros(length(fiber_all(:,1,2)), poly_order(1)+1);
@@ -76,8 +76,8 @@ for track_cntr=1:length(fiber_all(:,1,1))
         
         loop_track_points = [nonzeros(fiber_all(track_cntr,:,1)) nonzeros(fiber_all(track_cntr,:,2))];
         loop_track_mm = 0*loop_track_points;
-        loop_track_mm(:,2) = loop_track_points(:,1)*image_info_struc.PixelSpacing(2);
-        loop_track_mm(:,1) = loop_track_points(:,2)*image_info_struc.PixelSpacing(1);
+        loop_track_mm(:,2) = loop_track_points(:,1)*image_info_struc.PixelSpacingY;
+        loop_track_mm(:,1) = loop_track_points(:,2)*image_info_struc.PixelSpacingX;
         
         track_length_points = [0; cumsum((diff(loop_track_points(:,1)).^2 + diff(loop_track_points(:,2)).^2).^0.5)];
         coeff_c_pixels(track_cntr,:) = polyfit(track_length_points, loop_track_points(:,2), poly_order(1));

@@ -82,8 +82,8 @@ curvature_mean = zeros(num_tracts,1);
 curvature_all = (0*fiber_all_mm(:,:,1));
 
 % convert aponeurosis ROI to mm
-roi_x_mm = roi_struc.fitted_c_pixels*image_info_struc.PixelSpacing(1);
-roi_y_mm = roi_struc.fitted_r_pixels*image_info_struc.PixelSpacing(2);
+roi_x_mm = roi_struc.fitted_roi_c_pixels*image_info_struc.PixelSpacingX;
+roi_y_mm = roi_struc.fitted_roi_r_pixels*image_info_struc.PixelSpacingY;
 
 % architectural characterization loop
 for tract_cntr = 2:(num_tracts-1)
@@ -91,7 +91,7 @@ for tract_cntr = 2:(num_tracts-1)
     %get tract, convert to mm
     loop_track_mm = [nonzeros(fiber_all_mm(tract_cntr,:,1)) nonzeros(fiber_all_mm(tract_cntr,:,2))];
     track_length_mm = [0; cumsum((diff(loop_track_mm(:,1)).^2 + diff(loop_track_mm(:,2)).^2).^0.5)];
-    tract_lengths(tract_cntr) = track_length_mm;
+    tract_lengths(tract_cntr) = max(track_length_mm);
     
     if max(track_length_mm)>=5                                              % start of if statement: only characterize tracts at least 5 mm length
         index_5mm = find(track_length_mm>=5, 1);

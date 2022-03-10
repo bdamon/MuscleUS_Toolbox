@@ -1,17 +1,78 @@
-function [fiber_all_pixels, stop_list, angle_all] = fiber_track_us(vector_image, roi_struc, mask, ft_options, image_doub)
+function [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options)
+%
+%FUNCTION read_dicom_us
+%  [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, mask, ft_options, image_doub);
+%
+%USAGE
+%  The function fiber_track_us is used to perform fiber tractography in the
+%  MuscleUS_Toolbox. The inputs are derived from previous file opening
+%  (i.e, red_dicom_us), ROI definition (define_muscle_roi_us), and image
+%  processing (bmode2angle_us) steps.
+%
+%  The outputs include a matrix containing fiber tracts, with units of
+%  pixels and a vector containing the reason for fiber tract stoppage.  
+%
+%INPUT ARGUMENT
+%  vector_image: a spatial map of X and Y vector components of the fascicle
+%    orientation, at each pixel, in the gridded angle image
+%  roi_struc: the output of define_muscle_roi_us
+%  image_data_struc: the output of define_muscle_roi_us
+%  ft_options: a structure containing the following options for
+%  fiber-tracking:
+%   -step_size: the fiber-tracking step size, in pixels;
+%   -angle_thrsh: the inter-step angle above which fiber tracking would
+%     terminate, in degrees;
+%   -image_num: within a time series dataset, the image number to analyze
+%     (use 1 for a single-time point measurement)
+%   -show_image: use 1 to display the initial result after fiber-tracking
+%     or 0 not to display the result
+%
+%OUTPUT ARGUMENTS
+%  image_data_struc: The imaging data, with the following fields:
+%   -orig.native: The original DICOM image(s), with dimensions of rows x 
+%      columns x color layer (for RGB and YCbCr formats). Depending on the  
+%      acquisition details,there may be a fourth dimension, usually time.
+%   -orig.native.doub: The original images converted to double precision
+%   -orig.native.norm: The original images converted to a signal range of
+%      0-1 
+%   -gray: The images converted to grayscale
+%   -rbg: The images converted to RGB format
+%
+%  image_info_struc: The contents of the DICOM file header, plus:
+%   -dynamics: the number of images in the time series
+%   -PixelSpacingX (and Y, R, C): The pixel spacing, in mm, in the X, Y,
+%     row (=Y), and column (=X) directions
+%
+%VERSION INFORMATION
+%  v. 0.1
+%
+%ACKNOWLEDGEMENTS
+%  Grant support: NIH/NIAMS R01 AR073831
 
-%% Get options from ft_options
+%% Get variations from input structure
 
-% tracking options
-step_incr = ft_options.step_size;
-
-%tract termination options
+% options from ft_options
+step_size = ft_options.step_size;
 angle_thrsh = ft_options.angle_thrsh;
+if isfield(ft_options, 'image_num')
+    image_num = ft_options.image_num;
+else 
+    image_num = 1;
+end
+if isfield(ft_options, 'show_image')
+    show_image = 1;
+else 
+    show_image = 0;
+end
+
+%data from image_data_struc
+mask = image_data_struc.mask;
+image_gray = image_data_struc.gray(:,:,image_num);
 
 %% Propagate fiber tract
 % Get seed points
-roi_points = roi_struc.fitted_r_pixels;                                     %column number
-roi_points(2,:) = roi_struc.fitted_c_pixels;                                %row number
+roi_points = roi_struc.fitted_roi_r_pixels;                                     %column number
+roi_points(2,:) = roi_struc.fitted_roi_c_pixels;                                %row number
 
 %initialize fiber_all: 1st dimension fiber track #, 2nd dimension point #,
 %3rd dimension row/column indices
@@ -20,7 +81,6 @@ fiber_all_pixels = zeros(num_fibers,100,2);
 
 %iterate point by point then move to the next fiber
 stop_list=zeros(length(roi_points), 1);
-angle_all = zeros(num_fibers, 100);
 
 for track_cntr = 1:num_fibers
     
@@ -42,12 +102,11 @@ for track_cntr = 1:num_fibers
     %get next direction
     step_dir = squeeze(vector_image(row_point, col_point,:));               %local fascicle orientation
     step_dir_old = step_dir;                                                %to be used for inter-point angle calculations
-    angle_all(track_cntr,fiber_cntr) = acosd(dot(step_dir, [0 1]'));        %fiber orientation in image plane, with CCW rotation from east = 0
     
     %calculate next point
     fiber_cntr = fiber_cntr + 1;
     next_point = squeeze(fiber_all_pixels(track_cntr, fiber_cntr-1,:)) + ...
-        step_incr*step_dir;
+        step_size*step_dir;
     row_point = round(next_point(1));
     col_point = round(next_point(2));
     
@@ -75,7 +134,7 @@ for track_cntr = 1:num_fibers
         %calculate next point
         step_dir = squeeze(vector_image(row_point, col_point,:));
         next_point = squeeze(fiber_all_pixels(track_cntr, fiber_cntr-1,:)) + ...
-            step_incr*step_dir;
+            step_size*step_dir;
         row_point = round(next_point(1));
         col_point = round(next_point(2));
         
@@ -121,8 +180,8 @@ end
 
 %% view results
 
-if nargin>4
+if show_image==1
     
-    fiber_visualizer_us(image_doub, fiber_all_pixels, roi_struc)
+    fiber_visualizer_us(image_gray, fiber_all_pixels, roi_struc)
     
 end

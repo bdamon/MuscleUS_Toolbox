@@ -1,4 +1,4 @@
-function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_doub, mask, b2a_options)
+function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_gray, mask, b2a_options)
 %
 %FUNCTION bmode2angle_us
 %  [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_doub, mask, b2a_options)
@@ -54,9 +54,10 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %OUTPUT ARGUMENTS
 %  angle_image: An image with per-pixel fasicle orientations
 %
-%  masked_angle_image: angle_image with the mask applied
+%  masked_angle_image: angle_image with the muscle ROI mask applied
 %
-%  angle_image_grid: The gridded angle image 
+%  angle_image_grid: The gridded angle image, at the user-defined
+%   resolution
 %
 %  vector_image: The X and Y components of the gridded angle image
 %
@@ -98,7 +99,7 @@ for ns=1:length(stdev_values)
     h1=fspecial('gaussian', [gauss_size gauss_size], stdev_values(ns)) ;        %first gaussian filter
 
     % size changes, so no pre-allocation of memory space 
-    convs(:,:,ns)=conv2(image_doub, h1,'valid');                              	%convolve image with filter,
+    convs(:,:,ns)=conv2(image_gray, h1,'valid');                              	%convolve image with filter,
     hesmat(:,:,:,:,ns)=get_hessian(convs(:,:,ns));                              %take hessian of the convolution
     
 end
@@ -173,13 +174,13 @@ end
             
 %% form angle image
 
-cvn_images = zeros([size(image_doub) size(wavelet_function,3)]);
+cvn_images = zeros([size(image_gray) size(wavelet_function,3)]);
 for n=1:num_angles
-    cvn_images(:,:,n) = conv2(image_doub,squeeze(wavelet_function(:,:,n)),'same');
+    cvn_images(:,:,n) = conv2(image_gray,squeeze(wavelet_function(:,:,n)),'same');
 end
 
-n_rows = size(image_doub,1);
-n_cols = size(image_doub,2);
+n_rows = size(image_gray,1);
+n_cols = size(image_gray,2);
 angle_image = zeros(n_rows,n_cols);
 
 for nr=1:n_rows
@@ -191,27 +192,27 @@ for nr=1:n_rows
     end
 end
 
-angle_image = 180-angle_image;                                              %converts to ccw rotation from east=0;
+angle_image = 180 - angle_image;                                              %converts back to ccw rotation from image right=0;
 
 %% Process angle image
 
-col_diff = (size(image_doub,2)-size(vesselness_all,2))/2;
+col_diff = (size(image_gray,2)-size(vesselness_all,2))/2;
 col_index_1 = 1 + col_diff;
-row_diff = (size(image_doub,1)-size(vesselness_all,1))/2;
+row_diff = (size(image_gray,1)-size(vesselness_all,1))/2;
 row_index_1 = 1 + row_diff;
 
 %mask image based on Gaussian-convolved images
-noise_mask = zeros(size(image_doub));
-vesselness_end = zeros(size(image_doub));
+noise_mask = zeros(size(image_gray));
+vesselness_end = zeros(size(image_gray));
 vesselness_end((row_index_1:end-row_diff), (col_index_1:end-col_diff)) = squeeze(vesselness_all(:,:,end));
 vesselness_end = vesselness_end.*mask;
-noise_mask(vesselness_end > ((graythresh(vesselness_end)*max(max(vesselness_end))))) = 1;
+noise_mask(vesselness_end > (1.25*(graythresh(vesselness_end)*max(max(vesselness_end))))) = 1;
 
 %apply mask to angle_image
 masked_angle_image = mask.*noise_mask.*angle_image;
 
 %median filter the image in small chunks
-angle_image_grid = zeros(size(image_doub));
+angle_image_grid = zeros(size(image_gray));
 first_row = find(sum(mask,2), 1);
 first_col = find(sum(mask,1), 1);
 
@@ -219,7 +220,7 @@ for nr = first_row:num_pixels:(n_rows - num_pixels - 1)
     for nc = first_col:num_pixels:(n_cols - num_pixels - 1)
         
         loop_data = masked_angle_image(nr:(nr+num_pixels-1),nc:(nc+num_pixels-1));
-        if sum(sum(loop_data))>0
+        if sum(sum(loop_data))~=0
             loop_data = reshape(loop_data, numel(loop_data), 1);
             loop_data = loop_data(loop_data~=0);
             angle_image_grid(nr:(nr+num_pixels-1),nc:(nc+num_pixels-1)) = median(loop_data);

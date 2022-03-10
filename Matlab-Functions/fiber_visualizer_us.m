@@ -17,7 +17,7 @@ if nargin>1
     
     if exist('roi_struc', 'var')
         for k = 1:length(fiber_all(:,1,1))
-            plot(roi_struc.fitted_c_pixels, roi_struc.fitted_r_pixels, 'c')
+            plot(roi_struc.fitted_roi_c_pixels, roi_struc.fitted_roi_r_pixels, 'c')
         end
     end
 
