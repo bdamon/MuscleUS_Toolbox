@@ -12,14 +12,14 @@ function [image_data_struc, image_info_struc] = read_dicom_us(input_structure)
 %INPUT ARGUMENT
 %  input_structure (optional): A structure containing file input/output
 %    information. If used, the required fields are:
-%      -input_path_name: A path to the directory holding the image data
-%        files
-%      -input_file_name: The file name of interest, including the .DCM
+%      -.input_path_name: The file path to the directory in which the imaging 
+%        data are stored, in the native machine format
+%      -.input_file_name: The file name of interest, including the .DCM
 %        extension
-%      -output_path_name: A path to the directory where the Matlab data
-%        file will be stored
-%      -output_file_name: The file name of the Matlab data file
-%      -show_image: A flag to view the image (1=yes, 0=no). If the image
+%      -.output_path_name: The file path to the directory in which the Matlab data
+%        file will be stored, in the native machien format
+%      -.output_file_name: The file name of the Matlab data file
+%      -.show_image: A flag to view the image (1=yes, 0=no). If the image
 %        data is 4D, the first image of the data series is shown. If
 %        input_structure is not included as an input argument, show_image
 %        is set to zero by default.
