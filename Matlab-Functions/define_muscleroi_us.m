@@ -5,21 +5,21 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %
 %USAGE
 %  The function define_muscleroi_us is used to define regions of interest in
-%  the MuscleUS_Toolbox. An image is displayed and the user is prompted to
-%  define the muscle region of interest using the roipoly tool. The resulting 
-%  binary image mask, and other information about the region defined, are 
-%  output.
+%  the MuscleUS_Toolbox. 
 %
-%  Then the user is prompted to define the aponeurosis of muscle fascicle
-%  insertion using a series of left mouse clicks. A 2nd order polynomial 
-%  curve is fitted to the points. Evenly spaced points along this curve  
-%  will become the seed points for fiber-tracking.  The user can define the
-%  density (spacing) of these seed points.
+% An image is displayed and the user is prompted to define the muscle region 
+% of interest using the roipoly tool. Then the user is prompted to define 
+% the aponeurosis of muscle fascicle insertion using a series of left mouse 
+% clicks. A 2nd order polynomial curve is fitted to the points. Evenly spaced 
+% points along this curve will become the seed points for fiber-tracking.  
+% The user can define the density (spacing) of these seed points as in input 
+% option.  After each step, the user can inspect and verify these definitions 
+% before advancing.
 %
-%  After each step, the user can inspect and verify these definitions
-%  before advancing.
+% The binary image mask, aponeurosis definition, and other information about 
+% the regions defined, are output
 %
-%INPUT ARGUMENT
+%INPUT ARGUMENTS
 %  image_data_struc: A structure containing the imaging data, output from 
 %   read_dicom_us
 %
@@ -31,7 +31,7 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %      points, in mm
 %    -frame_num: The frame number within the image data series to be analyzed.
 %      If the data containing a time series, this is the frame number. If 
-%      there is only one image, use 1;
+%      there is only one image, use 1.
 %
 %OUTPUT ARGUMENTS
 %  image_data_struc: The input structure, plus the following additional
