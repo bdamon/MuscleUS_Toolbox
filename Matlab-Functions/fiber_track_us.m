@@ -1,52 +1,56 @@
-function [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options)
+function [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options, fv_options)
 %
-%FUNCTION read_dicom_us
+%FUNCTION fiber_track_us
 %  [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, mask, ft_options, image_doub);
 %
 %USAGE
 %  The function fiber_track_us is used to perform fiber tractography in the
 %  MuscleUS_Toolbox. The inputs are derived from previous file opening
-%  (i.e, red_dicom_us), ROI definition (define_muscle_roi_us), and image
-%  processing (bmode2angle_us) steps.
+%  (i.e, read_dicom_us), ROI definition (define_muscle_roi_us), and image
+%  processing (bmode2angle_us) steps.  
+%
+%  Fiber tracking occurs using Euler integration of the vectors that are
+%  used to describe muscle fascicle orientation, at a user-defined step size.
 %
 %  The outputs include a matrix containing fiber tracts, with units of
-%  pixels and a vector containing the reason for fiber tract stoppage.  
+%  pixels; and a vector containing the reason for fiber tract stoppage.  
 %
 %INPUT ARGUMENT
 %  vector_image: a spatial map of X and Y vector components of the fascicle
 %    orientation, at each pixel, in the gridded angle image
+%
 %  roi_struc: the output of define_muscle_roi_us
+%
 %  image_data_struc: the output of define_muscle_roi_us
+%
 %  ft_options: a structure containing the following options for
-%  fiber-tracking:
-%   -step_size: the fiber-tracking step size, in pixels;
-%   -angle_thrsh: the inter-step angle above which fiber tracking would
-%     terminate, in degrees;
-%   -image_num: within a time series dataset, the image number to analyze
-%     (use 1 for a single-time point measurement)
-%   -show_image: use 1 to display the initial result after fiber-tracking
-%     or 0 not to display the result
+%   fiber-tracking:
+%    -.step_size: the fiber-tracking step size, in pixels;
+%    -.angle_thrsh: the inter-step angle above which fiber tracking would
+%      terminate, in degrees;
+%    -.image_num: within a time series dataset, the image number to analyze
+%      (use 1 for a single-time point measurement)
+%    -.show_image: use 1 to display the initial result after fiber-tracking
+%      or 0 not to display the result
+%
+%  fv_options: As defined in fiber_visualizer_us
 %
 %OUTPUT ARGUMENTS
-%  image_data_struc: The imaging data, with the following fields:
-%   -orig.native: The original DICOM image(s), with dimensions of rows x 
-%      columns x color layer (for RGB and YCbCr formats). Depending on the  
-%      acquisition details,there may be a fourth dimension, usually time.
-%   -orig.native.doub: The original images converted to double precision
-%   -orig.native.norm: The original images converted to a signal range of
-%      0-1 
-%   -gray: The images converted to grayscale
-%   -rbg: The images converted to RGB format
+%  fiber_all_pixels: The fiber tracking data, with size MxNx2, where M is
+%    the number of fiber tracts, N is the number of points in the fiber
+%    tract (being padded with zeros because of varying fiber tract lengths, 
+%    and the third dimension includes row adn colume (Y and X) positions. The 
+%    units are image pixels.
 %
-%  image_info_struc: The contents of the DICOM file header, plus:
-%   -dynamics: the number of images in the time series
-%   -PixelSpacingX (and Y, R, C): The pixel spacing, in mm, in the X, Y,
-%     row (=Y), and column (=X) directions
+%  stop_list: A vector containing the reason for tract termination, with 1 =
+%    reaching the muscle border, as defined by the mask; and 2 = an excessive
+%    inter-point angle.
 %
 %VERSION INFORMATION
 %  v. 0.1
 %
 %ACKNOWLEDGEMENTS
+%  People: Hannah Kilpatrick, Bruce Damon
 %  Grant support: NIH/NIAMS R01 AR073831
 
 %% Get variations from input structure
@@ -182,6 +186,6 @@ end
 
 if show_image==1
     
-    fiber_visualizer_us(image_gray, fiber_all_pixels, roi_struc)
+    fiber_visualizer_us(image_gray, fv_options, fiber_all_pixels, roi_struc)
     
 end

@@ -60,7 +60,7 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 
 %% Prompt user to define muscle of interest in every dynamic of interest
 
-frame_num = dmr_options.frame_num;           %which frames to be analyzed
+frame_num = dmr_options.frame_num;                                          %which frames to be analyzed
 image_data_struc.mask = zeros(size(squeeze(image_data_struc.gray(:,:,1)))); %initialization of the mask
 
 figure('units', 'normalized', 'position', [.1 .1 .8 .7])
@@ -68,6 +68,7 @@ fig_position = get(gcf, 'position');
 
 while 1
 
+    %display image to be analyzed:
     show_image = image_data_struc.gray(:,:,frame_num);
     clf
     imagesc(show_image)
@@ -75,11 +76,13 @@ while 1
     axis image
     set(gcf, 'position', fig_position);
     
+    %user interacts with image
     title('Define muscle region of interest; Right-click and select Create Mask when finished')
     [mask, temp_roi_c_pixels, temp_roi_r_pixels] = roipoly;
     hold on
     plot(temp_roi_c_pixels, temp_roi_r_pixels, 'c')
     
+    %getteh figure position, in case the user has updated it
     fig_position = get(gcf, 'position');
     
     title('Press Enter to continue or any letter/Enter to repeat your selection')
@@ -106,6 +109,7 @@ figure('units', 'normalized', 'position', [.1 .1 .8 .7])
 
 while 1
 
+    %display image
     show_image = image_data_struc.gray(:,:,frame_num);
     clf
     imagesc(show_image)
@@ -113,8 +117,9 @@ while 1
     axis image
     set(gcf, 'position', fig_position);
     hold on
-    plot(temp_roi_c_pixels, temp_roi_r_pixels, 'c')
+    plot(temp_roi_c_pixels, temp_roi_r_pixels, 'c')                         %shows mask positions
     
+    %user interacts with image
     title('Define surface for seed points using left mouse clicks; Press right mouse button when finished')
     j=1;
     while 1
@@ -134,9 +139,9 @@ while 1
     
     
     %form smoothed line
-    roi_pixels_params = polyfit(temp_c_pixels, temp_r_pixels, 2);
+    roi_pixels_params = polyfit(temp_c_pixels, temp_r_pixels, 2);           %fit pixel positions to 2nd order polynomial
     temp_fitted_c_pixels = min(temp_c_pixels):max(temp_c_pixels);
-    temp_fitted_r_pixels = polyval(roi_pixels_params, temp_fitted_c_pixels);
+    temp_fitted_r_pixels = polyval(roi_pixels_params, temp_fitted_c_pixels); %solve polynomial to get smoothed curve
     
     %convert to mm and calculate distances
     temp_fitted_x_distance = temp_fitted_c_pixels*image_info_struc.PixelSpacingX;
@@ -169,6 +174,7 @@ while 1
     
 end
 
+%% finish forming the output structure
 roi_struc.roi_c_pixels = roi_c_pixels;
 roi_struc.roi_r_pixels = roi_r_pixels;
 roi_struc.fitted_roi_c_pixels = fitted_roi_c_pixels;

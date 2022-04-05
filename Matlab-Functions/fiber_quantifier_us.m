@@ -9,7 +9,7 @@ function [penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quant
 %  architectural parameters fiber tract length, pennation angle, and
 %  curvature in the MuscleUS_Toolbox.
 %
-%  The user inputs a mastrix containing fiber tract positions, specified in
+%  The user inputs a matrix containing fiber tract positions, specified in
 %  units of mm; a structure containing information about the seeding region
 %  of interest; and a structure containing image metadata. Computations are
 %  made automatically; the length of the full tract, pennation angle over the
@@ -43,25 +43,25 @@ function [penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quant
 %
 %INPUT ARGUMENTS
 %  fiber_all_mm: A matrix containing the fiber tract points, having units
-%  of mm
+%    of mm
 %
 %  roi_struc: A structure containing information about the aponeurosis ROI,
-%  output from define_muscleroi_us
+%    output from define_muscleroi_us
 %
 %  image_info_struc: A structure containing image metadata, output from
-%  read_dicom_us
+%    read_dicom_us
 %
 %OUTPUT ARGUMENTS: 
-%  penn_mean: a Vector containing the pennation angle of each tract, in
+%  penn_mean: A vector containing the pennation angle of each tract, in
 %  degrees
 %
 %  tract_lengths: A vector containing the fiber tract lengths, in mm
 %
 %  curvature_mean: A vector containing the mean curvature of each tract, in
-%  mm^-1
+%    mm^-1
 %
 %  curvature_all: A matrix containing the point-wise curvature values, in
-%  mm^-1
+%    mm^-1
 %
 %VERSION INFORMATION
 % v. 0.1

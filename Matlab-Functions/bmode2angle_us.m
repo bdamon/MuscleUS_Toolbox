@@ -5,7 +5,7 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %
 %USAGE
 %  The function bmode2angle_us is used to estimate muscle fascicle
-%  orientations in the MuscleUS_Toolbox. The user provides a b-mode image,
+%  orientations in the MuscleUS_Toolbox. The user provides a B-mode image,
 %  the mask defining the region of interest in the image, and a structure
 %  containing options for estimating the fascicle orientations. The
 %  fascicle orientations are estimated using the algorithm presented by Rana
@@ -24,7 +24,7 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %  orientations.
 %
 %INPUT ARGUMENTS
-%  image_doub: A double-precision, B-mode image
+%  image_doub: A grayscale, B-mode image at double-precision
 %
 %  mask: The output of define_muscleroi_us
 %
@@ -43,7 +43,7 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %   -wavelet_kernel: The kernel size of the wavelet
 %   -wavelet_freq: The expected spatial frequency of the fascicles
 %   -min_angle: The minimum angle to use when convolving the wavelets with
-%     the image (note that the east side of the image = 0 degrees and
+%     the image (note that the right side of the image = 0 degrees and
 %     angles increase in a CCW manner).
 %   -max_angle: The maximum angle to use when convolving the wavelets with
 %     the image
@@ -65,9 +65,10 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %  v. 0.1
 %
 %ACKNOWLEDGEMENTS
+%  People: Emily Bush, Ke Li, Hannah Kilpatrick, Bruce Damon
 %  Grant support: NIH/NIAMS R01 AR073831
 
-%% get options from input structure
+% get options from input structure
 
 % for vesselness calculations
 stdev_1 = b2a_options.stdev_1;
@@ -90,7 +91,7 @@ num_angles = b2a_options.num_angles;
 %median filtering options
 num_pixels = b2a_options.num_pixels;
 
-%% Calculate vesselness
+% Calculate vesselness
 
 %Convolution and get Hessian matrix
 stdev_values= stdev_1:stdev_inc:stdev_2;
@@ -143,7 +144,7 @@ for nr=1:n_rows
 end
 
 
-%% Form anisotropic wavelet
+% Form anisotropic wavelet
 
 %account for frame of reference for images vs wavelet
 min_angle = min_angle+180;
@@ -172,7 +173,7 @@ for x = -kernel_radius:kernel_radius
 end
 
             
-%% form angle image
+% form angle image
 
 cvn_images = zeros([size(image_gray) size(wavelet_function,3)]);
 for n=1:num_angles
@@ -194,7 +195,7 @@ end
 
 angle_image = 180 - angle_image;                                              %converts back to ccw rotation from image right=0;
 
-%% Process angle image
+% Process angle image
 
 col_diff = (size(image_gray,2)-size(vesselness_all,2))/2;
 col_index_1 = 1 + col_diff;
@@ -231,13 +232,106 @@ end
 % angle_image_median = medfilt2(angle_image, [num_pixels num_pixels]);
 angle_image_grid = angle_image_grid.*mask;
 
-%% Calculate vector images: Frame of reference is origin at row 1, column 1 and positively increasing from there
+% Calculate vector images: Frame of reference is origin at row 1, column 1 and positively increasing from there
 
 vector_image = sind(angle_image_grid).*mask;                              %holds row increments
 vector_image(:,:,2) = cosd(angle_image_grid).*mask;                       %holds column increments
 vector_image(:,:,1) = -vector_image(:,:,1);
 
 
-%% end of function
+% end of function
 
 return;
+
+%%
+function [Lambda1,Lambda2,Ix,Iy]=eig2image(Dxx,Dxy,Dyy)
+% 
+%FUNCTION eig2image
+%  [Lambda1,Lambda2,Ix,Iy]=eig2image(Dxx,Dxy,Dyy)
+%
+% USAGE
+%  This function eig2image calculates the eigenvalues from the Hessian matrix: 
+% 
+%  | Dxx  Dxy |
+%  |          |
+%  | Dxy  Dyy |
+%
+%  sorted by abs value, and gives the direction of the ridge (eigenvector
+%  smallest eigenvalue).
+%  
+%  The user does not interact with this function.  It is called by
+%  bmode2angle_us.
+%
+% ACKNOWLEDGEMENTS
+%  Downloaded from 
+%  http://www.mathworks.com/matlabcentral/fileexchange/24409-hessian-based-frangi-vesselness-filter
+%  by Ke Li, 2012-06-19
+
+% Compute the eigenvectors of J, v1 and v2
+tmp = sqrt((Dxx - Dyy).^2 + 4*Dxy.^2);
+v2x = 2*Dxy; v2y = Dyy - Dxx + tmp;
+
+% Normalize
+mag = sqrt(v2x.^2 + v2y.^2); i = (mag ~= 0);
+v2x(i) = v2x(i)./mag(i);
+v2y(i) = v2y(i)./mag(i);
+
+% The eigenvectors are orthogonal
+v1x = -v2y; 
+v1y = v2x;
+
+% Compute the eigenvalues
+mu1 = 0.5*(Dxx + Dyy + tmp);
+mu2 = 0.5*(Dxx + Dyy - tmp);
+
+% Sort eigen values by absolute value abs(Lambda1)<abs(Lambda2)
+check=abs(mu1)>abs(mu2);
+
+Lambda1=mu1; Lambda1(check)=mu2(check);
+Lambda2=mu2; Lambda2(check)=mu1(check);
+
+Ix=v1x; Ix(check)=v2x(check);
+Iy=v1y; Iy(check)=v2y(check);
+
+% end the function
+return
+
+
+%%
+function [H] = get_hessian(img)
+%
+%FUNCTION get_hessian
+%  [H] = get_hessian(img);
+%
+%USAGE
+%  The function read_dicom_us is used to calculate the Hessian matrix of
+%  image, based on its intensity gradients.
+%
+%INPUT ARGUMENT
+%  img: The source image (assumed to be 2D).
+%
+%OUTPUT ARGUMENTS
+%  H: Aspatial map of the Hassian matrices
+%
+%VERSION INFORMATION
+%  v. 1.0
+%
+%ACKNOWLEDGEMENTS
+%  People: Emily Bush, Ke Li
+%  Grant support: NIH/NIAMS R01 AR050101, NIH/NIAMS R01 AR073831
+
+%% calculate the Hessian matrix
+H = zeros([size(img) 2 2]);
+
+[Gx, Gy] = gradient(img);  % Gx is the gradient along column direction
+[Gxx, Gxy] = gradient(Gx);
+[Gyx, Gyy] = gradient(Gy);
+
+H(:, :, 1, 1) = Gxx;
+H(:, :, 1, 2) = Gxy;
+H(:, :, 2, 1) = Gyx;
+H(:, :, 2, 2) = Gyy;
+
+%% end the function
+return;
+
