@@ -4,10 +4,17 @@ function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_
 %  us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_struc);
 %
 %USAGE
-%  The function fiber_visualizer_us is used to fiber-tracts in the MuscleUS_Toolbox.
-%  The user provides a double precision B-mode image, a matrix of fiber-tracts,
-%  a structure containing ROI definitions, and a structure containing
-%  visualization options.
+%  The function fiber_ visualizer_us is used to visualize ultrasound images and 
+%  other structures, including the muscle mask, aponeurosis definition, and/or the 
+%  fiber tracts.
+%
+%  The user can call fiber_visualizer from the command line.  In addition, 
+%  read_dicom_us, fiber_track, and fiber_smoother_us, can be configured to call 
+%  fiber_visualizer from within the functions, so that the image, mask, 
+%  aponeurosis definition, and fiber tracts can be automatically plotted.  The 
+%  user supplies a double precision image, a structure with some plotting 
+%  options, and the other variables to be plotted as input arguments. A handle 
+%  to the figure is returned.
 %
 %INPUT ARGUMENTS
 %  image_doub: A grayscale, B-mode image at double-precision
