@@ -11,14 +11,21 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %  fascicle orientations are estimated using the algorithm presented by Rana
 %  et al., (J Biomech, 42:2068,2009), in which the images are processed using 
 %    -A series of Gaussian blurring steps of varying sizes  
-%    -Calculation of the vesselness response of the structures
-%    -Calculation of the Hessian matrix of the vesselness response 
-%    -An anisotropic wavelet is convolved with the image at a range of
-%     orientations
-%    -The angle at which the maximum convolution of the wavelet with the image
-%     is taken as the fascicle orientation.  
-%  The median value of the angles within grid squares of user-defined 
-%  dimensions is taken.  
+%    -For each of the convolved images, calculation of the Hessian matrix and 
+%     their eigenvalues and eigenvectors
+%    -For each of the convolved images, calculation of the vesselness response 
+%     of the structures. The maximum vesselness response is used to indicate
+%     the locations of vessel-like structures (i.e., fascicles).
+%    -An anisotropic wavelet is convolved with the image at a range of 
+%     orientations 
+%    -The wavelet is convolved with the image at a range of orientations. For
+%     each angle, the wavelet's convolution with the image is taken. 
+%    -The angle corresponding to the maximum convolution is taken as the fascicle
+%     orientation.  
+%    -The locations of vessel-like structures within the image are used to mask 
+%     out the orientation information from non-fascicular structures.
+%    -The median value of the angles within grid squares of user-defined 
+%     dimensions is taken.  
 %  
 %  The function returns an image at the original resolution, a masked image
 %  at the original resolution, an image with the median angles calculated 
@@ -55,7 +62,7 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %    .num_pixels: the size of the grid squares
 %
 %OUTPUT ARGUMENTS
-%  angle_image: An image with per-pixel fasicle orientations
+%  angle_image: An image with per-pixel fascicle orientations
 %
 %  masked_angle_image: angle_image with the muscle ROI mask applied
 %
