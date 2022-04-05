@@ -17,39 +17,42 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %     orientations
 %    -The angle at which the maximum convolution of the wavelet with the image
 %     is taken as the fascicle orientation.  
-%  The angles are averaged across grid squares of user-defined dimensions.  
-%  The function returns an image at the original resolution, a masked image at
-%  the original resolution, a gridded image of angles, and a masked image
-%  with the components of unit vectors indicating the fascicle
-%  orientations.
+%  The median value of the angles within grid squares of user-defined 
+%  dimensions is taken.  
+%  
+%  The function returns an image at the original resolution, a masked image
+%  at the original resolution, an image with the median angles calculated 
+%  within the grid squares, and a masked image with the X and Y components 
+%  of unit vectors that indicate the fascicle orientations.
 %
 %INPUT ARGUMENTS
 %  image_doub: A grayscale, B-mode image at double-precision
 %
 %  mask: The output of define_muscleroi_us
 %
-%  b2a_options: A structure containing the following fields:
-%   -stdev_1: The minimum standard deviation of the Gaussian blurring window, 
-%     in pixels
-%   -stdev_2: The maximum standard deviation of the Gaussian blurring window, 
-%     in pixels
-%   -stdev_inc: The amount to increase the Gaussian blurring window per 
-%     iteration, in pixels
-%   -gauss_size: The row x column dimensions of the Gaussian blurring window,  
-%     in pixels
-%   -vessel_beta: The beta value in the vesselness response function
-%   -vessel_c: The C value in the vesselness response function
-%   -wavelet_damp: The damping coefficient D of the wavelet
-%   -wavelet_kernel: The kernel size of the wavelet
-%   -wavelet_freq: The expected spatial frequency of the fascicles
-%   -min_angle: The minimum angle to use when convolving the wavelets with
-%     the image (note that the right side of the image = 0 degrees and
-%     angles increase in a CCW manner).
-%   -max_angle: The maximum angle to use when convolving the wavelets with
-%     the image
-%   -num_angles: The number of angles to use when convolving the wavelets with
-%     the image
-%   -num_pixels: the size of the grid squares
+%  b2a_options: A structure with processing options, containing the following 
+%    fields:
+%    -.stdev_1: The minimum standard deviation of the Gaussian blurring window, 
+%      in pixels
+%    -.stdev_2: The maximum standard deviation of the Gaussian blurring window, 
+%      in pixels
+%    -.stdev_inc: The amount to increase the Gaussian blurring window per 
+%      iteration, in pixels
+%    -.gauss_size: The row x column dimensions of the Gaussian blurring window,  
+%      in pixels
+%    -.vessel_beta: The beta value in the vesselness response function
+%    -.vessel_c: The C value in the vesselness response function
+%    -.wavelet_damp: The damping coefficient D of the wavelet
+%    -.wavelet_kernel: The kernel size of the wavelet
+%    -.wavelet_freq: The expected spatial frequency of the fascicles
+%    -.min_angle: The minimum angle to use when convolving the wavelets with
+%      the image (note that the right side of the image = 0 degrees and
+%      angles increase in a CCW manner).
+%    -.max_angle: The maximum angle to use when convolving the wavelets with
+%      the image
+%    -.num_angles: The number of angles to use when convolving the wavelets with
+%      the image
+%    .num_pixels: the size of the grid squares
 %
 %OUTPUT ARGUMENTS
 %  angle_image: An image with per-pixel fasicle orientations
