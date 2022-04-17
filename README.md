@@ -35,6 +35,7 @@ Using the B-mode image, the muscle fascicles orientations are estimated using th
  * An anisotropic wavelet is convolved with the image at a range of orientations
  * The angle at which the maximum convolution of the wavelet with the image is taken as the fascicle orientation.  
  * The angles are averaged across grid squares of user-defined dimensions.  
+
 The function returns an image at the original resolution, a masked image at the original resolution, a gridded image of angles, and a masked image with the components of unit vectors indicating the fascicle orientations.
 
 ### D. Generate the fiber tracts using the function <i>fiber_track_us</i>
