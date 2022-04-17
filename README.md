@@ -29,13 +29,14 @@ Real muscle fibers are assumed to be contained entirely within a single muscle o
 
 ### C. Calculate the fiber orientations using the function <i>bmode2angle_us</i>
 Using the B-mode image, the muscle fascicles orientations are estimated using the algorithm presented by Rana et al., (J Biomech, 42:2068,2009). The images are processed using the following steps: 
-A series of Gaussian blurring steps of varying sizes  
- *Calculation of the vesselness response of the structures
- *Calculation of the Hessian matrix of the vesselness response 
- *An anisotropic wavelet is convolved with the image at a range of orientations
- *The angle at which the maximum convolution of the wavelet with the image is taken as the fascicle orientation.  
- *The angles are averaged across grid squares of user-defined dimensions.  
- The function returns an image at the original resolution, a masked image at the original resolution, a gridded image of angles, and a masked image with the components of unit vectors indicating the fascicle orientations.
+ * A series of Gaussian blurring steps of varying sizes  
+ * Calculation of the vesselness response of the structures
+ * Calculation of the Hessian matrix of the vesselness response 
+ * An anisotropic wavelet is convolved with the image at a range of orientations
+ * The angle at which the maximum convolution of the wavelet with the image is taken as the fascicle orientation.  
+ * The angles are averaged across grid squares of user-defined dimensions.  
+The function returns an image at the original resolution, a masked image at the original resolution, a gridded image of angles, and a masked image with the components of unit vectors indicating the fascicle orientations.
+
 ### D. Generate the fiber tracts using the function <i>fiber_track_us</i>
 Fiber tracts are propagated from the seed points by following the direction indicated by the second eigenvector of the image intensity gradient's Hessian matrix. The function <i>fiber_track_us</i> is used to perform this integration. The major output of this function is a matrix containing the {row, column, slice} coordinates of each point along each fiber tract. Follow [this link](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md) for detailed help on this function.
 
