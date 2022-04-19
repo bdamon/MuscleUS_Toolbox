@@ -60,9 +60,9 @@ The output arguments are:
   
     <i>.roi_r_pixels</i>: The Y (row) points used to define the aponeurosis region of interest
    
-    <i>.fitted_roi_c_pixels</i>: The X (column) points used to define the aponeurosis region of interest, after smoothing using a 3rd order polynomial function
+    <i>.fitted_roi_c_pixels</i>: The X (column) points used to define the aponeurosis region of interest, after smoothing using a 2nd order polynomial function
   
-    <i>.fitted_roi_r_pixels</i>: The Y (row) points used to define the aponeurosis region of interest, after smoothing using a 3rd order polynomial function
+    <i>.fitted_roi_r_pixels</i>: The Y (row) points used to define the aponeurosis region of interest, after smoothing using a 2nd order polynomial function
    
     <i>.roi_resolution</i>: The distance between seed points
   
