@@ -23,6 +23,8 @@ Then the user is prompted to define the aponeurosis of muscle fascicle insertion
 
 After each step, the user can inspect and verify these definitions before advancing.
 
+An updated image data structure and the binary image mask, aponeurosis definition, and other information about the region defined, are output.
+
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md)
 
 ## 3. Syntax
