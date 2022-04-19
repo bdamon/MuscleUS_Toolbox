@@ -21,9 +21,10 @@ The user provides a B-mode image, the mask defining the region of interest in th
 * Calculation of the vesselness response of the structures to form a vesselness-filtered image
 * An anisotropic wavelet is convolved with the filtered image at a user-specified range of orientations
 * The angle at which the maximum convolution of the wavelet with the image is taken as the fascicle orientation.  
+* The locations of vessel-like structures within the image are used to mask out the orientation information from non-fascicular structures.
 The angles are averaged across grid squares of user-defined dimensions.  
 
-The function returns an image at the original resolution, a masked image at the original resolution, an image containing the median angles within the grid squares, and a masked image with the components of unit vectors indicating the fascicle orientations.
+The function returns an image at the original resolution, a masked image at the original resolution, an image with the median angles calculated within the grid squares, and a masked image with the X and Y components of unit vectors that indicate the fascicle orientations.  Angles are specified as a counterclockwise rotation from the right side of the image = 0⁰, as in the figure below.
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
 
@@ -46,7 +47,7 @@ The input arguments are:
     <i>.stdev_inc</i>: The amount to increase the Gaussian blurring window per iteration, in pixels
    
     <i>.gauss_size</i>: The row x column dimensions of the Gaussian blurring window, in pixels
-  Parameters describing teh vesselness response calculation:
+  Parameters describing the vesselness response calculation:
     <i>.vessel_beta</i>: The beta value in the vesselness response function
    
     <i>.vessel_c</i>: The C value in the vesselness response function
