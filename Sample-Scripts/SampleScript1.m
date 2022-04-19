@@ -4,21 +4,26 @@ close all
 clc
 
 %% Open file
+
+% set file I/O options:
 input_structure.input_path_name = 'S:\Muscle_DTI\Ultrasound_sample_images\Sample_US_2022.3.4';
 input_structure.input_file_name = 'TA_4';
 input_structure.output_path_name = input_structure.input_path_name;
 input_structure.output_file_name =  'TA_4_output.mat';
 input_structure.show_image = 1;
 
+% call the function:
 [image_data_struc, image_info_struc] = read_dicom_us(input_structure);
 
 %% Define muscle and aponeurosis ROIs
 
-dmr_options.roi_resolution = 1;                         %mm
-dmr_options.frame_num = 1;                         
+% set options
+dmr_options.roi_resolution = 1;                         %1 mm spacing
+dmr_options.frame_num = 1;     
+
+% call the function
 [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, image_info_struc, dmr_options);
 
-close all
 
 %% Process images
 
@@ -29,7 +34,7 @@ b2a_options.stdev_inc = 0.5;
 b2a_options.gauss_size = 15;
 b2a_options.vessel_beta = 0.5; 
 b2a_options.vessel_c = 0.5;
-b2a_options.wavelet_damp = 2.56;
+b2a_options.wavelet_damp = 2.5622;
 b2a_options.wavelet_kernel = 25;
 b2a_options.wavelet_freq = 20;
 b2a_options.min_angle = -135;
@@ -37,8 +42,10 @@ b2a_options.max_angle = -225;
 b2a_options.num_angles = 91;
 b2a_options.num_pixels = 60;
 
-%convert b-mode image to angle image
+% set grayscale image
 image_gray = image_data_struc.gray(:,:);
+
+% call the function:
 [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_gray, image_data_struc.mask, b2a_options);
 
 %% view results
@@ -103,14 +110,22 @@ plot(roi_struc.fitted_roi_c_pixels(1:length(find(roi_struc.fitted_roi_c_pixels))
     roi_struc.fitted_roi_r_pixels(1:length(find(roi_struc.fitted_roi_r_pixels))), 'r', 'linewidth', 1)
 
 %% Fiber track
-clc
+
+% define fiber tracking options:
 ft_options.step_size = 30;                                                  %in pixels
 ft_options.angle_thrsh = 25;                                                %in degrees
-ft_options.show_image = 1;                                                %show the image
+ft_options.show_image = 1;                                                  %show the image
 ft_options.image_num = 1;
-    fv_options.tract_color=[1 1 0];
-    fv_options.roi_color=[0 1 1];
 
+% define visualization options:
+fv_options.plot_mask=1;                                                     %show the mask
+fv_options.plot_tracts=1;                                                   %show the tracts
+fv_options.plot_roi=1;                                                      %show the roi
+fv_options.tract_color=[1 1 0];                                             %tracts will be yellow
+fv_options.roi_color=[0 1 1];                                               %roi will be cyan
+fv_options.mask_color=[1 0 1];                                              %mask will be magenta
+
+% call the function:
 [fiber_all, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options, fv_options);
 
 
@@ -125,9 +140,8 @@ fs_options.interp_distance = 0.1;
 [penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quantifier_us(smoothed_fiber_all_mm, roi_struc, image_info_struc);
 
 %% View final result
-fv_options.tract_color(1:24,1)=curvature_mean/5;
-fv_options.tract_color(1:24,2)=1-curvature_mean/5;
-fv_options.tract_color(1:24,3)=0;
+fv_options.tract_color(1:length(smoothed_fiber_all_pixels(:,1,1)),1)=curvature_mean/max(curvature_mean);
+fv_options.tract_color(1:length(smoothed_fiber_all_pixels(:,1,1)),2)=1-curvature_mean/max(curvature_mean);
+fv_options.tract_color(1:length(smoothed_fiber_all_pixels(:,1,1)),3)=0;
 
-fiber_visualizer_us(image_gray, fv_options, fiber_all, roi_struc);
 fiber_visualizer_us(image_gray, fv_options, smoothed_fiber_all_pixels, roi_struc);
