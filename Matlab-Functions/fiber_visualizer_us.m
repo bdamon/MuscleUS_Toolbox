@@ -7,7 +7,7 @@ function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_
 %  The function fiber_visualizer_us is used to fiber-tracts in the MuscleUS_Toolbox.
 %  The user provides a double precision B-mode image, a matrix of fiber-tracts,
 %  a structure containing ROI definitions, and a structure containing
-%  visualization options.
+%  visualization options.  The image and user-selected options are displayed.
 %
 %INPUT ARGUMENTS
 %  image_doub: A grayscale, B-mode image at double-precision
@@ -16,7 +16,7 @@ function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_
 %  following fields:
 %    -.plot_tracts: If set to 1, the fiber tracts will be plotted; other-
 %       wise, set to 0
-%    -.plot_mask: If set to 1, the muscle ROI will be plotted; other-
+%    -.plot_mask: If set to 1, the muscle mask will be plotted; other-
 %       wise, set to 0
 %    -.plot_roi: If set to 1, the aponeurosis ROI will be plotted; other-
 %       wise, set to 0
@@ -26,14 +26,14 @@ function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_
 %       number of fiber tracts), each tract will be plotted using a 
 %       different color
 %    -.mask_color: Required when plot_mask = 1. A 1x3 vector used to 
-%       indicate the color of the muscle region of interest
+%       indicate the color of the muscle mask
 %    -.roi_color: Required when plot_roi = 1. A 1x3 vector used to indicate 
 %       the color of the aponeurosis region of interest
 %
-%  fiber_all (optional): The fiber tracts to be displayed, if desired
+%  fiber_all: The fiber tracts to be displayed; required when plot_tracts=1
 %
-%  roi_struc (optional): A structure with ROI data (output from
-%   define_muscleroi_us), if desired
+%  roi_struc: A structure with ROI data (output from define_muscleroi_us);
+%  required when plot_mask=1 or when plot_roi=1
 %
 %OUTPUT ARGUMENTS
 %  us_figure: A MATLAB figure structure
