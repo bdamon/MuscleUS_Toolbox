@@ -52,31 +52,18 @@ The output arguments are:
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_smoother_us.md)
 
 ## 4. Example Code
-### Example 1:
-The code below will measure fit the tracts' {row column} and {X Y} positions to 2<sup>nd</sup>-order polynomial functions, as functions of distance along the tract, and interpolate the fitted tracts at intervals of 0.25 mm:
 
-%% set options:
+% set options
 
-fs_options.interp_distance=0.25;
+fs_options.poly_order = [3 3];
 
-fs_options.poly_order=[2 2];
+fs_options.interp_distance = 0.1;
 
-%% call the function:
-
-[smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = fiber_smoother_us(fiber_all, image_info_struc, fs_options, [], []);
+% call teh function:
+[smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
+    fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_gray, roi_struc, fv_options);
   
-### Example 2:
-The code below will measure fit the tracts' {row column} and {X Y} positions to 2<sup>nd</sup>-order polynomial functions, as functions of distance along the tract, and interpolate the fitted tracts at intervals of 0.5 mm, and allow the fitted tracts to be displayed:
 
-%% set options:
-
-fs_options.interp_distance=0.25;
-
-fs_options.poly_order=[2 2];
-
-%% call the function:
-
-[smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_doub, roi_struc);
   
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_smoother_us.md)
 
