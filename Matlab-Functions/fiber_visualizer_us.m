@@ -5,9 +5,15 @@ function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_
 %
 %USAGE
 %  The function fiber_visualizer_us is used to fiber-tracts in the MuscleUS_Toolbox.
-%  The user provides a double precision B-mode image, a matrix of fiber-tracts,
-%  a structure containing ROI definitions, and a structure containing
-%  visualization options.  The image and user-selected options are displayed.
+%  
+%  The user can call fiber_visualizer from the command line.  In addition, read_dicom_us,
+%  fiber_track, and fiber_smoother_us, can be configured to call fiber_visualizer from 
+%  within the functions, so that the image, mask, aponeurosis definition, and fiber tracts 
+%  can be automatically plotted, The user provides a double precision B-mode image, 
+%  a structure containing visualization options, and the variables to bed plotted.
+%  The image and user-selected options are displayed.
+%
+%  A handle to the figure is returned.
 %
 %INPUT ARGUMENTS
 %  image_doub: A grayscale, B-mode image at double-precision
