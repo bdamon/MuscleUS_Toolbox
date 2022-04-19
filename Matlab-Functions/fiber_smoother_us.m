@@ -3,7 +3,7 @@ function [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coef
 %
 %FUNCTION fiber_smoother_us
 % [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
-%    fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_doub, roi_struc)
+%    fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_doub, roi_struc, fv_options)
 %
 %USAGE
 %  The function fiber_smoother_us is used to smooth fiber tracts and increase
