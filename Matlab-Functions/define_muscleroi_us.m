@@ -5,21 +5,21 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %
 %USAGE
 %  The function define_muscleroi_us is used to define regions of interest in
-%  the MuscleUS_Toolbox. 
+%  the MuscleUS_Toolbox. An image is displayed and the user is prompted to
+%  define the muscle region of interest using the roipoly tool. The resulting 
+%  binary image mask, and other information about the region defined, are 
+%  output.
 %
-% An image is displayed and the user is prompted to define the muscle region 
-% of interest using the roipoly tool. Then the user is prompted to define 
-% the aponeurosis of muscle fascicle insertion using a series of left mouse 
-% clicks. A 2nd order polynomial curve is fitted to the points. Evenly spaced 
-% points along this curve will become the seed points for fiber-tracking.  
-% The user can define the density (spacing) of these seed points as in input 
-% option.  After each step, the user can inspect and verify these definitions 
-% before advancing.
+%  Then the user is prompted to define the aponeurosis of muscle fascicle
+%  insertion using a series of left mouse clicks. A 2nd order polynomial 
+%  curve is fitted to the points. Evenly spaced points along this curve  
+%  will become the seed points for fiber-tracking.  The user can define the
+%  density (spacing) of these seed points.
 %
-% The binary image mask, aponeurosis definition, and other information about 
-% the regions defined, are output
+%  After each step, the user can inspect and verify these definitions
+%  before advancing.
 %
-%INPUT ARGUMENTS
+%INPUT ARGUMENT
 %  image_data_struc: A structure containing the imaging data, output from 
 %   read_dicom_us
 %
@@ -27,34 +27,42 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %   read_dicom_us
 %
 %  dmr_options: A structure containing the following fields:
-%    -roi_resolution: The desired distance between fiber tracking seed  
+%    -.roi_resolution: The desired distance between fiber tracking seed  
 %      points, in mm
-%    -frame_num: The frame number within the image data series to be analyzed.
+%    -.frame_num: The frame number within the image data series to be analyzed.
 %      If the data containing a time series, this is the frame number. If 
-%      there is only one image, use 1.
+%      there is only one image, use 1;
 %
 %OUTPUT ARGUMENTS
 %  image_data_struc: The input structure, plus the following additional
 %   fields:
 %    -mask: A binary image mask defining the muscle of interest
-%    -masked_gray: The mask applied to the grayscale images.
+%    -masked_gray: The masked grayscale images.
 %
 %  roi_struc: A structure with information about the seed surface ROI,
 %   containing the following fields:
-%    -muscle_c_pixels: The X (column) points used to define the muscle ROI
-%    -muscle_r_pixels: The Y (row) points used to define the muscle ROI
-%    -roi_c_pixels: The selected X (column) points
-%    -roi_r_pixels: The selected Y (row) points
-%    -fitted_roi_c_pixels: The fitted X (column) points
-%    -fitted_roi_r_pixels: The fitted Y (row) points
-%    -roi_resolution: The distance between fiber tracking points
-%    -roi_pixels_params: The fitted parameters for pixel locations in the
-%      ROI
+%    -.muscle_c_pixels: The X (column) points used to define the muscle 
+%      boundaries (mask)
+%    -.muscle_r_pixels: The Y (row) points used to define the muscle 
+%      boundaries (mask)
+%    -.roi_c_pixels: The X (column) points used to define the aponeurosis 
+%      region of interest
+%    -.roi_r_pixels: The selected Y (row) points
+%    -.fitted_roi_c_pixels: The X (column) points used to define the 
+%      aponeurosis region of interest, after smoothing using a 3rd order 
+%      polynomial function
+%    -.fitted_roi_r_pixels: The Y (row) points used to define the 
+%      aponeurosis region of interest, after smoothing using a 3rd order 
+%      polynomial function
+%    -.roi_resolution: The distance between seed points
+%    -.roi_pixels_params: The fitted parameters for pixel locations in the
+%      aponeurosis region of interest
 %
 %VERSION INFORMATION
 %  v. 0.1
 %
 %ACKNOWLEDGEMENTS
+%  People: Bruce Damon, Hannah Kilpatrick
 %  Grant support: NIH/NIAMS R01 AR073831
 
 
