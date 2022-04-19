@@ -19,6 +19,9 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %  After each step, the user can inspect and verify these definitions
 %  before advancing.
 %
+%  An updated image data structure and the binary image mask, aponeurosis 
+%  definition, and other information about the region defined, are output.
+%
 %INPUT ARGUMENT
 %  image_data_struc: A structure containing the imaging data, output from 
 %   read_dicom_us
