@@ -1,7 +1,7 @@
 function [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options, fv_options)
 %
 %FUNCTION fiber_track_us
-%  [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, mask, ft_options, image_doub);
+%  [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options, fv_options);
 %
 %USAGE
 %  The function fiber_track_us is used to perform fiber tractography in the
@@ -16,19 +16,18 @@ function [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc,
 %  pixels; and a vector containing the reason for fiber tract stoppage.  
 %
 %INPUT ARGUMENT
-%  vector_image: a spatial map of X and Y vector components of the fascicle
+%  vector_image: A spatial map of X and Y vector components of the fascicle
 %    orientation, at each pixel, in the gridded angle image
 %
 %  roi_struc: the output of define_muscle_roi_us
 %
 %  image_data_struc: the output of define_muscle_roi_us
 %
-%  ft_options: a structure containing the following options for
-%   fiber-tracking:
-%    -.step_size: the fiber-tracking step size, in pixels;
+%  ft_options: 
+%    -.step_size: the fiber-tracking step size, in pixels
 %    -.angle_thrsh: the inter-step angle above which fiber tracking would
-%      terminate, in degrees;
-%    -.image_num: within a time series dataset, the image number to analyze
+%      terminate, in degrees
+%    -.image_num: for a time series dataset, the image number to analyze
 %      (use 1 for a single-time point measurement)
 %    -.show_image: use 1 to display the initial result after fiber-tracking
 %      or 0 not to display the result
