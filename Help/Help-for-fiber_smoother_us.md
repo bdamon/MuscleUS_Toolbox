@@ -55,11 +55,12 @@ The output arguments are:
 
 % set options
 
-fs_options.poly_order = [3 3];
+fs_options.poly_order = [3 3];  %3rd order polynomial fitting
 
-fs_options.interp_distance = 0.1;
+fs_options.interp_distance = 0.1;   %ingterpolate fitted tracts at 0.1 mm spacing
 
-% call teh function:
+% call the function:
+
 [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
     fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_gray, roi_struc, fv_options);
   
