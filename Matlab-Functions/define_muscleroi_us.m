@@ -36,8 +36,8 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %OUTPUT ARGUMENTS
 %  image_data_struc: The input structure, plus the following additional
 %   fields:
-%    -mask: A binary image mask defining the muscle of interest
-%    -masked_gray: The masked grayscale images.
+%    -.mask: A binary image mask defining the muscle of interest
+%    -.masked_gray: The masked grayscale images.
 %
 %  roi_struc: A structure with information about the seed surface ROI,
 %   containing the following fields:
