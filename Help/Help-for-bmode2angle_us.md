@@ -83,22 +83,37 @@ The output argumetns are:
 The code below will set processing optiosn as in the published manuscript and calculate the angle image and its derived images
 
 %set processing options
+
 b2a_options.stdev_1 = 1.5;
+
 b2a_options.stdev_2 = 3; 
+
 b2a_options.stdev_inc = 0.5;
+
 b2a_options.gauss_size = 15;
+
 b2a_options.vessel_beta = 0.5; 
+
 b2a_options.vessel_c = 0.5;
+
 b2a_options.wavelet_damp = 2.5622;
+
 b2a_options.wavelet_kernel = 25;
+
 b2a_options.wavelet_freq = 20;
+
 b2a_options.min_angle = -135;
+
 b2a_options.max_angle = -225;
+
 b2a_options.num_angles = 91;
+
 b2a_options.num_pixels = 60;
 
 %convert b-mode image to angle image
+
 image_gray = image_data_struc.gray(:,:);
+
 [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_gray, image_data_struc.mask, b2a_options);
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
