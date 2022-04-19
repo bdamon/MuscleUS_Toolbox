@@ -52,7 +52,7 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %      aponeurosis region of interest, after smoothing using a 2nd order 
 %      polynomial function
 %    -.fitted_roi_r_pixels: The Y (row) points used to define the 
-%      aponeurosis region of interest, after smoothing using a 3rd order 
+%      aponeurosis region of interest, after smoothing using a 2nd order 
 %      polynomial function
 %    -.roi_resolution: The distance between seed points
 %    -.roi_pixels_params: The fitted parameters for pixel locations in the
