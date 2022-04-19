@@ -33,8 +33,6 @@ The function define_muscleroi_us is called using the following syntax:
 [image_data_struc, roi_struc] = define_muscle_roi(image_data_struc, image_info_struc, roi_resolution);
 
 The input arguments are:
-* <i>anat_image</i>: The imaging data. 
-
 * <i>image_data_struc</i>: A structure containing the imaging data, output from [<i>read_dicom_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md).
 
 * <i>image_info_struc</i>: A structure containing the imaging metadata, output from [<i>read_dicom_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md). 
