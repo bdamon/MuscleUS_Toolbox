@@ -25,7 +25,7 @@ The user provides a double precision B-mode image, a matrix of fiber-tracts, a s
 ## 3. Syntax
 The function define_muscleroi_us is called using the following syntax:
 
-[image_data_struc, roi_struc] = define_muscle_roi(image_data_struc, image_info_struc, roi_resolution);
+us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_struc);
 
 The input arguments are:
 * <i>image_doub</i>: A grayscale, B-mode image at double-precision. 
@@ -55,55 +55,23 @@ The output arguments are:
 
 ## 4. Example Code
 
-### Example 1
-Given 
+% define visualization options:
 
-1.	An anatomical image with variable name anat_image and having matrix size 192x192x44, field of view 192x192 mm, and slice thickness 7 mm;
+fv_options.plot_mask=1;                                                     %show the mask
 
-2.	The muscle mask, stored in a variable called mask; and
+fv_options.plot_tracts=1;                                                   %show the tracts
 
-3.	DTI images, having matrix size 192x192x44, field of view 192x192 mm, and slice thickness 7 mm
+fv_options.plot_roi=1;                                                      %show the roi
 
-the code below will allow the user to:
+fv_options.tract_color=[1 1 0];                                             %tracts will be yellow
 
-1.	Manually select aponeurosis in slices 4-31;
+fv_options.roi_color=[0 1 1];                                               %roi will be cyan
 
-2.	Create a mesh of size 150 rows x 30 columns; and
-
-3.	Visualize the outcome, using slices 14, 24, 34, and 44 of the anatomical image stack for reference.
-
-% Set mesh options:
-
-dr_options.slices = [4 31]; %analyze slices 4-31
-
-dr_options.dti_size = [192 192 44]; %matrix size and # of slices in DTI images
-
-dr_options.mesh_size = [150 30]; %mesh will have 150 rows and 30 columns
-
-dr_options.method = ‘manual'; %digitize it manually
-
-% Set visualization options
-
-fv_options.anat_dims = [192 7]; %FOV and slice thickness of the images to be displayed, in mm
-
-fv_options.anat_slices = 14:10:44; %display slices 14, 24, 34, and 44 
-
-fv_options.plot_mesh = 1; %do plot the aponeurosis mesh
-
-fv_options.plot_mask = 0; %don’t plot the mask
-
-fv_options.plot_fibers = 0; %don’t plot any fiber tracts
-
-fv_options.mesh_size = [192 192]; %rows x columns of the images used to generate the mesh
-
-fv_options.mesh_dims = [192 7]; %FOV and ST of the images used to create the mesh
-
-fv_options.mesh_color = [0.75 0.75 0.75]; %make the mesh light gray
+fv_options.mask_color=[1 0 1];                                              %mask will be magenta
 
 % call the function:
 
-roi_mesh = define_roi(anat_image, mask, dr_options, plot_options);
- 
+us_figure = fiber_visualizer_us(image_gray, fv_options, fiber_all_pixels, roi_struc);
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
 
