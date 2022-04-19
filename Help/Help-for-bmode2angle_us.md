@@ -17,7 +17,7 @@ The function <i>bmode2angle_us</i> is used to estimate muscle fascicle orientati
 
 ## 2. Usage
 The user provides a B-mode image, the mask defining the region of interest in the image, and a structure containing options for estimating the fascicle orientations. The fascicle orientations are estimated using the algorithm presented by Rana et al., (J Biomech, 42:2068,2009), in which the images are processed using 
-* A series of Gaussian blurring steps of varying sizes  
+* A series of Gaussian blurring steps of varying sizes. The user can control the minimum and maximum sizes (standard deviation) of the Gaussian blurring function; the increment used during the progression from the minimum to maximum sizes; and the row and column dimensions of the Gaussian function.  All options have units of pixels. 
 * Calculation of the vesselness response of the structures to form a vesselness-filtered image
 * An anisotropic wavelet is convolved with the filtered image at a user-specified range of orientations
 * The angle at which the maximum convolution of the wavelet with the image is taken as the fascicle orientation.  
