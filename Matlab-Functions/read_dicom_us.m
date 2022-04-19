@@ -9,15 +9,18 @@ function [image_data_struc, image_info_struc] = read_dicom_us(input_structure)
 %  optional input argument input_structure.  If input_structure is not
 %  included, the user is prompted to select the input and output file names.
 %
+%  Structures containing the image(s) (in several formats) and the image 
+%  metadata are returned
+%
 %INPUT ARGUMENT
 %  input_structure (optional): A structure containing file input/output
 %    information. If used, the required fields are:
-%      -.input_path_name: The file path to the directory in which the imaging 
-%        data are stored, in the native machine format
+%      -.input_path_name: A path to the directory holding the image data
+%        files
 %      -.input_file_name: The file name of interest, including the .DCM
 %        extension
-%      -.output_path_name: The file path to the directory in which the Matlab data
-%        file will be stored, in the native machien format
+%      -.output_path_name: A path to the directory where the Matlab data
+%        file will be stored
 %      -.output_file_name: The file name of the Matlab data file
 %      -.show_image: A flag to view the image (1=yes, 0=no). If the image
 %        data is 4D, the first image of the data series is shown. If
@@ -28,11 +31,11 @@ function [image_data_struc, image_info_struc] = read_dicom_us(input_structure)
 %
 %OUTPUT ARGUMENTS
 %  image_data_struc: The imaging data, with the following fields:
-%   -orig.native: The original DICOM image(s), with dimensions of rows x
+%   -.orig.native: The original DICOM image(s), with dimensions of rows x
 %      columns x color layer (for RGB and YCbCr formats). Depending on the
-%      acquisition details,there may be a fourth dimension, usually time.
-%   -orig.native.doub: The original images converted to double precision
-%   -orig.native.norm: The original images converted to a signal range of
+%      acquisition details, there may be a fourth dimension, usually time.
+%   -.orig.native.doub: The original images converted to double precision
+%   -.orig.native.norm: The original images converted to a signal range of
 %      0-1
 %   -gray: The images converted to grayscale
 %   -rbg: The images converted to RGB format
@@ -46,6 +49,7 @@ function [image_data_struc, image_info_struc] = read_dicom_us(input_structure)
 %  v. 0.1
 %
 %ACKNOWLEDGEMENTS
+%  People: Bruce Damon
 %  Grant support: NIH/NIAMS R01 AR073831
 
 %% Examine input structure, if present; otherwise, prompt user for variable and path names
@@ -149,7 +153,11 @@ cd(output_path_name)
 
 if show_image == 1
 
-    fiber_visualizer_us(image_data_struc.gray(:,:,1))
+    fv_options.plot_tracts=0;
+    fv_options.plot_roi=0;
+    fv_options.plot_mask=0;
+
+    fiber_visualizer_us(image_data_struc.gray(:,:,1), fv_options)
 
 end
 
