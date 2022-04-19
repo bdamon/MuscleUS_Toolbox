@@ -24,7 +24,9 @@ Structures containing the image(s) (in several formats) and the image metadata a
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md)
 
 ## 3. Syntax
-The function define_muscleroi_us is called using the following syntax:
+The function read_dicom_us is called using the following syntax:
+
+[image_data_struc, image_info_struc] = read_dicom_us(input_structure);
 
 The input argument is:
 * <i>input_structure</i> (optional): A structure containing the following fields:
