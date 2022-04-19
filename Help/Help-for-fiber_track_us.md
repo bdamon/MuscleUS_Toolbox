@@ -16,11 +16,9 @@ The function <i>fiber_smoother_us</i> is used to perform fiber tractography in t
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md)
 
 ## 2. Usage
-The inputs are derived from previous file opening (i.e, <i>read_dicom_us</i>), ROI definition (<i>define_muscle_roi_us</i>), and image processing (<i>bmode2angle_us</i>) steps.
+The inputs are derived from previous file opening (i.e, <i>read_dicom_us</i>), ROI definition (<i>define_muscle_roi_us</i>), and image processing (<i>bmode2angle_us</i>) steps, plus a structure defining the fiber-tracking options. This structure allows the user to set the tracking step size and tract termination criteria. Fiber tracking begins at the aponeurosis seed points and continues by using Euler integration of the vectors that are used to describe muscle fascicle orientation. Tracking occurs at a user-defined step size and terminates either due to high inter-point angle or if the tract reaches the muscle boundary, as defined by the image mask. The outputs include a matrix containing fiber tracts, with units of pixels; and a vector containing the reason for fiber tract termination.
 
-Fiber tracking occurs using Euler integration of the vectors that are used to describe muscle fascicle orientation, at a user-defined step size.
-
-The outputs include a matrix containing fiber tracts, with units of pixels; and a vector containing the reason for fiber tract stoppage.
+The fiber tracts may be viewed using <i>fiber_visualizer_us</i>, either as part of the function call to <i>fiber_track_us</i> or directly from the command line.
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md)
 
