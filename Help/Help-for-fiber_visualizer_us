@@ -1,0 +1,1 @@
+us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_struc);
