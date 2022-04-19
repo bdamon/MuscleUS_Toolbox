@@ -39,7 +39,9 @@ The input arguments are:
 * <i>mask</i>: The output of define_muscleroi_us
 
 * <i>b2a_options</i>: A structure containing the following processing options:
+* 
   Parameters describing the Gaussian convolution:
+  
     <i>.stdev_1</i>: The minimum standard deviation of the Gaussian blurring window, in pixels
 
     <i>.stdev_2</i>: The maximum standard deviation of the Gaussian blurring window, in pixels
@@ -47,11 +49,15 @@ The input arguments are:
     <i>.stdev_inc</i>: The amount to increase the Gaussian blurring window per iteration, in pixels
    
     <i>.gauss_size</i>: The row x column dimensions of the Gaussian blurring window, in pixels
+    
   Parameters describing the vesselness response calculation:
+  
     <i>.vessel_beta</i>: The beta value in the vesselness response function
    
     <i>.vessel_c</i>: The C value in the vesselness response function
-  Parameters describing the formation of the wavelet and waveletconvolution with the vesselness-filtered image::
+    
+  Parameters describing the formation of the wavelet and wavelet convolution with the vesselness-filtered image:
+  
     <i>.wavelet_damp</i>: The damping coefficient D of the wavelet
    
     <i>.wavelet_kernel</i>: The kernel size of the wavelet, in pixels
@@ -65,14 +71,16 @@ The input arguments are:
     <i>.max_angle</i>: The maximum angle to use when convolving the wavelets with the image, in degrees
   
     <i>.num_angles</i>: The number of angles to use when convolving the wavelets with the image
+    
   Parameters describing the averaging over grid squares:
+  
     <i>.num_pixels</i>: The size of the grid squares (n), in pixels (i.e., n x n)
 
 The output arguments are:
 
 * <i>angle_image</i>: An image with per-pixel fasicle orientations
 
-* <i>masked_angle_image</i>: angle_image with the muscle ROI mask applied
+* <i>masked_angle_image</i>: <i>angle_image</i> with the muscle ROI mask applied
 
 * <i>angle_image_grid</i>: The gridded angle image, at the user-defined resolution
 
