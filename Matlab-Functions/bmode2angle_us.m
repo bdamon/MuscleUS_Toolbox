@@ -11,58 +11,48 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %  fascicle orientations are estimated using the algorithm presented by Rana
 %  et al., (J Biomech, 42:2068,2009), in which the images are processed using 
 %    -A series of Gaussian blurring steps of varying sizes  
-%    -For each of the convolved images, calculation of the Hessian matrix and 
-%     their eigenvalues and eigenvectors
-%    -For each of the convolved images, calculation of the vesselness response 
-%     of the structures. The maximum vesselness response is used to indicate
-%     the locations of vessel-like structures (i.e., fascicles).
-%    -An anisotropic wavelet is convolved with the image at a range of 
-%     orientations 
-%    -The wavelet is convolved with the image at a range of orientations. For
-%     each angle, the wavelet's convolution with the image is taken. 
-%    -The angle corresponding to the maximum convolution is taken as the fascicle
-%     orientation.  
-%    -The locations of vessel-like structures within the image are used to mask 
-%     out the orientation information from non-fascicular structures.
-%    -The median value of the angles within grid squares of user-defined 
-%     dimensions is taken.  
-%  
-%  The function returns an image at the original resolution, a masked image
-%  at the original resolution, an image with the median angles calculated 
-%  within the grid squares, and a masked image with the X and Y components 
-%  of unit vectors that indicate the fascicle orientations.
+%    -Calculation of the vesselness response of the structures to form a
+%     vesselness-filtered image
+%    -An anisotropic wavelet is convolved with the filtered image at a user-
+%     specified range of orientations
+%    -The angle at which the maximum convolution of the wavelet with the image
+%     is taken as the fascicle orientation.  
+%  The angles are averaged across grid squares of user-defined dimensions.  
+%  The function returns an image at the original resolution, a masked image at
+%  the original resolution, a gridded image of angles, and a masked image
+%  with the components of unit vectors indicating the fascicle
+%  orientations.
 %
 %INPUT ARGUMENTS
 %  image_doub: A grayscale, B-mode image at double-precision
 %
 %  mask: The output of define_muscleroi_us
 %
-%  b2a_options: A structure with processing options, containing the following 
-%    fields:
-%    -.stdev_1: The minimum standard deviation of the Gaussian blurring window, 
-%      in pixels
-%    -.stdev_2: The maximum standard deviation of the Gaussian blurring window, 
-%      in pixels
-%    -.stdev_inc: The amount to increase the Gaussian blurring window per 
-%      iteration, in pixels
-%    -.gauss_size: The row x column dimensions of the Gaussian blurring window,  
-%      in pixels
-%    -.vessel_beta: The beta value in the vesselness response function
-%    -.vessel_c: The C value in the vesselness response function
-%    -.wavelet_damp: The damping coefficient D of the wavelet
-%    -.wavelet_kernel: The kernel size of the wavelet
-%    -.wavelet_freq: The expected spatial frequency of the fascicles
-%    -.min_angle: The minimum angle to use when convolving the wavelets with
-%      the image (note that the right side of the image = 0 degrees and
-%      angles increase in a CCW manner).
-%    -.max_angle: The maximum angle to use when convolving the wavelets with
-%      the image
-%    -.num_angles: The number of angles to use when convolving the wavelets with
-%      the image
-%    .num_pixels: the size of the grid squares
+%  b2a_options: A structure containing the following fields:
+%   -stdev_1: The minimum standard deviation of the Gaussian blurring window, 
+%     in pixels
+%   -stdev_2: The maximum standard deviation of the Gaussian blurring window, 
+%     in pixels
+%   -stdev_inc: The amount to increase the Gaussian blurring window per 
+%     iteration, in pixels
+%   -gauss_size: The row x column dimensions of the Gaussian blurring window,  
+%     in pixels
+%   -vessel_beta: The beta value in the vesselness response function
+%   -vessel_c: The C value in the vesselness response function
+%   -wavelet_damp: The damping coefficient D of the wavelet
+%   -wavelet_kernel: The kernel size of the wavelet
+%   -wavelet_freq: The expected spatial frequency of the fascicles
+%   -min_angle: The minimum angle to use when convolving the wavelets with
+%     the image (note that the right side of the image = 0 degrees and
+%     angles increase in a CCW manner).
+%   -max_angle: The maximum angle to use when convolving the wavelets with
+%     the image
+%   -num_angles: The number of angles to use when convolving the wavelets with
+%     the image
+%   -num_pixels: the size of the grid squares
 %
 %OUTPUT ARGUMENTS
-%  angle_image: An image with per-pixel fascicle orientations
+%  angle_image: An image with per-pixel fasicle orientations
 %
 %  masked_angle_image: angle_image with the muscle ROI mask applied
 %
@@ -78,7 +68,9 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %  People: Emily Bush, Ke Li, Hannah Kilpatrick, Bruce Damon
 %  Grant support: NIH/NIAMS R01 AR073831
 
-% get options from input structure
+%% MAIN FUNCTION IS bmode2angle
+
+% get options from the input structure
 
 % for vesselness calculations
 stdev_1 = b2a_options.stdev_1;
@@ -88,29 +80,43 @@ gauss_size = b2a_options.gauss_size;
 vessel_beta = b2a_options.vessel_beta; 
 vessel_c = b2a_options.vessel_c;
 
-%for wavelet function
+% for wavelet function
 wavelet_damp = b2a_options.wavelet_damp; 
 wavelet_kernel = b2a_options.wavelet_kernel; 
 wavelet_freq = b2a_options.wavelet_freq; 
 
-%angle precision
+% angle precision
 min_angle = b2a_options.min_angle;
 max_angle = b2a_options.max_angle;
 num_angles = b2a_options.num_angles;
 
-%median filtering options
+% median filtering options
 num_pixels = b2a_options.num_pixels;
 
-% Calculate vesselness
+% calculate maximum vesselness response
 
-%Convolution and get Hessian matrix
+% Convolution and Hessian matrix
 stdev_values= stdev_1:stdev_inc:stdev_2;
+convs=zeros([size(image_gray) length(stdev_values)]);
+hesmat=zeros([size(image_gray) 2 2 length(stdev_values)]);
 for ns=1:length(stdev_values)
     
-    h1=fspecial('gaussian', [gauss_size gauss_size], stdev_values(ns)) ;        %first gaussian filter
+    h1=fspecial('gaussian', [gauss_size gauss_size], stdev_values(ns));     %first Gaussian filter
 
-    % size changes, so no pre-allocation of memory space 
-    convs(:,:,ns)=conv2(image_gray, h1,'valid');                              	%convolve image with filter,
+    temp_convs = conv2(image_gray, h1,'valid');                              	%convolve image with Gaussian filter
+
+    % first time, get difference in size betwen image_gray and convolution image 
+    if ns==1
+        row_diff = length(image_gray(:,1)) - length(temp_convs(:,1));
+        row_1 = 1 + row_diff/2;
+        row_end = length(image_gray(:,1)) - row_diff/2;
+
+        col_diff = length(image_gray(:,1)) - length(temp_convs(:,1));
+        col_1 = 1 + col_diff/2;
+        col_end = length(image_gray(1,:)) - col_diff/2;
+    end
+
+    convs(row_1:row_end,col_1:col_end,ns) = temp_convs;
     hesmat(:,:,:,:,ns)=get_hessian(convs(:,:,ns));                              %take hessian of the convolution
     
 end
@@ -129,7 +135,7 @@ for ns=1:length(stdev_values)
     Dyy = hesmat(:,:,2,2,ns);
     
     % Calculate (abs sorted) eigenvalues and vectors
-    [Lambda1,Lambda2,Ix,Iy]=eig2image(Dxx,Dxy,Dyy); 
+    [Lambda1, Lambda2, Ix, Iy] = eig2image(Dxx,Dxy,Dyy); 
     Lambda2(Lambda2==0) = eps;
     Rb = (Lambda1./Lambda2).^2;
     S2 = sqrt(Lambda1.^2 + Lambda2.^2);   
@@ -143,7 +149,7 @@ for ns=1:length(stdev_values)
     
 end
 
-%calculate vesselness response matrix
+% calculate vesselness response matrix
 for nr=1:n_rows
     for nc=1:n_co1
         
@@ -184,14 +190,13 @@ end
 
             
 % form angle image
-
-cvn_images = zeros([size(image_gray) size(wavelet_function,3)]);
+cvn_images = zeros([size(vesselness_max) size(wavelet_function,3)]);
 for n=1:num_angles
-    cvn_images(:,:,n) = conv2(image_gray,squeeze(wavelet_function(:,:,n)),'same');
+    cvn_images(:,:,n) = conv2(vesselness_max,squeeze(wavelet_function(:,:,n)),'same');
 end
 
-n_rows = size(image_gray,1);
-n_cols = size(image_gray,2);
+n_rows = size(vesselness_max,1);
+n_cols = size(vesselness_max,2);
 angle_image = zeros(n_rows,n_cols);
 
 for nr=1:n_rows
@@ -243,7 +248,6 @@ end
 angle_image_grid = angle_image_grid.*mask;
 
 % Calculate vector images: Frame of reference is origin at row 1, column 1 and positively increasing from there
-
 vector_image = sind(angle_image_grid).*mask;                              %holds row increments
 vector_image(:,:,2) = cosd(angle_image_grid).*mask;                       %holds column increments
 vector_image(:,:,1) = -vector_image(:,:,1);
@@ -253,7 +257,7 @@ vector_image(:,:,1) = -vector_image(:,:,1);
 
 return;
 
-%%
+%% function definition for eig2image (called by bmode2angle)
 function [Lambda1,Lambda2,Ix,Iy]=eig2image(Dxx,Dxy,Dyy)
 % 
 %FUNCTION eig2image
@@ -307,7 +311,7 @@ Iy=v1y; Iy(check)=v2y(check);
 return
 
 
-%%
+%% function definition for get_hessian (called by bmode2angle)
 function [H] = get_hessian(img)
 %
 %FUNCTION get_hessian
@@ -321,7 +325,7 @@ function [H] = get_hessian(img)
 %  img: The source image (assumed to be 2D).
 %
 %OUTPUT ARGUMENTS
-%  H: Aspatial map of the Hassian matrices
+%  H: A spatial map of the Hassian matrices
 %
 %VERSION INFORMATION
 %  v. 1.0
