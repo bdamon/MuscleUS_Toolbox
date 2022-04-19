@@ -5,17 +5,24 @@ function [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc,
 %
 %USAGE
 %  The function fiber_track_us is used to perform fiber tractography in the
-%  MuscleUS_Toolbox. The inputs are derived from previous file opening
-%  (i.e, read_dicom_us), ROI definition (define_muscle_roi_us), and image
-%  processing (bmode2angle_us) steps.  
+%  MuscleUS_Toolbox. The inputs are derived from previous file opening 
+%  (i.e, read_dicom_us), ROI definition (define_muscle_roi_us), and image 
+%  processing (bmode2angle_us) steps, plus a structure defining the fiber-
+%  tracking options.  This structure allows the user to set the tracking 
+%  step size and tract termination criteria. Fiber tracking begins at the 
+%  aponeurosis seed points and continues by using Euler integration of the 
+%  vectors that describe muscle fascicle orientation. Tracking occurs at a 
+%  user-defined step size and terminates either due to high inter-point 
+%  angle or if the tract reaches the muscle boundary, as defined by the 
+%  image mask. The outputs include a matrix containing fiber tracts, with 
+%  units of pixels; and a vector containing the reason for fiber tract 
+%  termination.
+%  
+%  The fiber tracts may be viewed using fiber_visualizer_us, either as 
+%  part of the function call to fiber_track_us or directly from the 
+%  command line.
 %
-%  Fiber tracking occurs using Euler integration of the vectors that are
-%  used to describe muscle fascicle orientation, at a user-defined step size.
-%
-%  The outputs include a matrix containing fiber tracts, with units of
-%  pixels; and a vector containing the reason for fiber tract stoppage.  
-%
-%INPUT ARGUMENT
+%INPUT ARGUMENTS
 %  vector_image: A spatial map of X and Y vector components of the fascicle
 %    orientation, at each pixel, in the gridded angle image
 %
