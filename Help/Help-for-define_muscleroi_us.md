@@ -12,7 +12,7 @@ This help file contains information about
 
 ## 1. Purpose
 
-The function <i>define_muscleroi_us</i> is used to define structures of interest in the MuscleUS_Toolbox, including an image mask defining the muscle boundaries and a curved line defined the aponeurosis region of interest.  
+The function <i>define_muscleroi_us</i> is used to define structures of interest in the MuscleUS_Toolbox, including the image mask defining the muscle boundaries and a curved line defined the aponeurosis region of interest.  
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md)
 
