@@ -10,7 +10,11 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %  containing options for estimating the fascicle orientations. The
 %  fascicle orientations are estimated using the algorithm presented by Rana
 %  et al., (J Biomech, 42:2068,2009), in which the images are processed using 
-%    -A series of Gaussian blurring steps of varying sizes  
+%    -A series of Gaussian blurring steps of varying sizes. The user can 
+%     control the minimum and maximum sizes (standard deviation) of the 
+%     Gaussian blurring function; the increment used during the progression 
+%     from the minimum to maximum sizes; and the row and column dimensions 
+%     of the Gaussian function.  All options have units of pixels.
 %    -Calculation of the vesselness response of the structures to form a
 %     vesselness-filtered image
 %    -An anisotropic wavelet is convolved with the filtered image at a user-
@@ -18,10 +22,13 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image] = bmo
 %    -The angle at which the maximum convolution of the wavelet with the image
 %     is taken as the fascicle orientation.  
 %  The angles are averaged across grid squares of user-defined dimensions.  
-%  The function returns an image at the original resolution, a masked image at
-%  the original resolution, a gridded image of angles, and a masked image
-%  with the components of unit vectors indicating the fascicle
-%  orientations.
+%  
+%  The function returns an image at the original resolution, a masked 
+%  image at the original resolution, an image with the median angles 
+%  calculated within the grid squares, and a masked image with the X 
+%  and Y components of unit vectors that indicate the fascicle 
+%  orientations.  Angles are specified as a counterclockwise rotation 
+%  from the right side of the image = 0⁰.
 %
 %INPUT ARGUMENTS
 %  image_doub: A grayscale, B-mode image at double-precision
