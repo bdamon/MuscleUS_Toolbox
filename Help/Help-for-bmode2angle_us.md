@@ -89,7 +89,16 @@ The output arguments are:
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
 
 ## 4. Example Code
-The code below will set processing optiosn as in the published manuscript and calculate the angle image and its derived images
+Given:
+1.	A grayscale image stored in the variable image_data_struc.gray;
+
+the following code will allow the user to 
+
+1.	Define a Gaussian kernel with standard deviations of 1.5-3 pixels and kernel size 30x30, in SD increments of 0.5 pixels
+2.	Estimate the vesselness response with coefficients  and C of 0.5
+3.	Create an anisotropic wavelet with damping coefficient = 2.5622 and kernel size of 26x26, a spatial frequency for the fascicles of 20 pixels, across angles of -135 to -225 degrees, in steps of 1 degree
+4.	Smooth the values using a median filter, in grids of 60x60
+
 
 %set processing options
 
