@@ -1,7 +1,7 @@
-function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_struc)
+function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all_mm, roi_struc)
 %
 %FUNCTION fiber_visualizer_us
-%  us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_struc);
+%  us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all_mm, roi_struc);
 %
 %USAGE
 %  The function fiber_visualizer_us is used to fiber-tracts in the MuscleUS_Toolbox.
@@ -36,7 +36,7 @@ function us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_
 %    -.roi_color: Required when plot_roi = 1. A 1x3 vector used to indicate 
 %       the color of the aponeurosis region of interest
 %
-%  fiber_all: The fiber tracts to be displayed; required when plot_tracts=1
+%  fiber_all_mm: The fiber tracts to be displayed; required when plot_tracts=1
 %
 %  roi_struc: A structure with ROI data (output from define_muscleroi_us);
 %  required when plot_mask=1 or when plot_roi=1
@@ -61,11 +61,11 @@ hold on
 
 
 if fv_options.plot_tracts==1
-    for k = 1:length(fiber_all(:,1,1))
+    for k = 1:length(fiber_all_mm(:,1,1))
 
         %get fiber tract poins
-        loop_c = nonzeros(squeeze(fiber_all(k,:,2)));
-        loop_r = nonzeros(squeeze(fiber_all(k,:,1)));
+        loop_c = nonzeros(squeeze(fiber_all_mm(k,:,2)));
+        loop_r = nonzeros(squeeze(fiber_all_mm(k,:,1)));
 
         %plot using user-defined color(s)
         if numel(fv_options.tract_color)==3
