@@ -67,7 +67,7 @@ The input arguments are:
   Parameters describing the averaging over grid squares:
     <i>.num_pixels</i>: The size of the grid squares (n), in pixels (i.e., n x n)
 
-The output argumetns are:
+The output arguments are:
 
 * <i>angle_image</i>: An image with per-pixel fasicle orientations
 
