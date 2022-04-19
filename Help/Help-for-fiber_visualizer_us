@@ -9,7 +9,6 @@ This help file contains information about
 5) [Example Code](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md#4-Example-Code)
 6) [Acknowledgements](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md#5-Acknowledgements)
 
-
 ## 1. Purpose
 
 The function <i>define_muscleroi_us</i> is used to fiber-tracts in the MuscleUS_Toolbox.  
