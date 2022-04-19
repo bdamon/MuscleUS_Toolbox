@@ -11,7 +11,7 @@ This help file contains information about
 
 ## 1. Purpose
  
-The function <i>fiber_smoother_us</i> is used to perform fiber tractography in the MuscleUS_Toolbox.
+The function <i>fiber_track_us</i> is used to perform fiber tractography in the MuscleUS_Toolbox.
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md)
 
