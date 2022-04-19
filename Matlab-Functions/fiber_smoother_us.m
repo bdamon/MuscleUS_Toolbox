@@ -1,9 +1,9 @@
 function [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
-    fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_doub, roi_struc, fv_options)
+    fiber_smoother_us(fiber_all_pixels, image_info_struc, fs_options, image_doub, roi_struc, fv_options)
 %
 %FUNCTION fiber_smoother_us
 % [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
-%    fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_doub, roi_struc, fv_options)
+%    fiber_smoother_us(fiber_all_pixels, image_info_struc, fs_options, image_doub, roi_struc, fv_options)
 %
 %USAGE
 %  The function fiber_smoother_us is used to smooth fiber tracts and increase
@@ -21,9 +21,9 @@ function [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coef
 %  and matrices containing the polynomial coefficients for each tract.
 %
 %INPUT ARGUMENTS
-%  fiber_all: The original fiber tracts, output from fiber_track_us
+%  fiber_all_pixels: The original fiber tracts, output from fiber_track_us
 %
-%  image_info_struc: The output caontaining image metadata, output from
+%  image_info_struc: The structure containing image metadata, output from
 %   read_dicom_us
 %
 %  fs_options: a structure containing the following fields:
