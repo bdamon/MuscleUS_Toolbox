@@ -30,8 +30,6 @@ The input arguments are:
 
 * <i>fv_options</i>: A structure containing the fololowing fields:
 
-* <i>image_info_struc</i>: A structure containing the imaging metadata, output from [<i>read_dicom_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md). 
-
     <i>.plot_tracts</i>: If set to 1, the fiber tracts will be plotted; otherwise, set to 0
 
     <i>.plot_mask</i>: If set to 1, the muscle mask will be plotted; otherwise, set to 0
