@@ -11,11 +11,13 @@ This help file contains information about
 
 ## 1. Purpose
 
-The function <i>define_muscleroi_us</i> is used to fiber-tracts in the MuscleUS_Toolbox.  
+The function <i>define_muscleroi_us</i> is used is used to visualize ultrasound images and other structures, including the muscle mask, aponeurosis definition, and/or the fiber tracts, in the MuscleUS_Toolbox.  
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
 
 ## 2. Usage
+The user can call fiber_visualizer from the command line.  In addition, <i>read_dicom_us</i>, <i>fiber_track</i>, and <i>fiber_smoother_us</i>, can be configured to call <i>fiber_visualizer</i> from within the functions, so that the image, mask, aponeurosis definition, and fiber tracts can be automatically plotted.  
+
 The user provides a double precision B-mode image, a matrix of fiber-tracts, a structure containing ROI definitions, and a structure containing visualization options. The image and user-selected options are displayed.
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
