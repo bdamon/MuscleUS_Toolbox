@@ -1,4 +1,4 @@
-# Help for the function <i>fiber_visualizer_us</i>, v. 0.1.x
+# Help for the function <i>fiber_visualizer_us</i>, v. 1.0.0
 
 ## Introduction
 
@@ -11,16 +11,12 @@ This help file contains information about
 
 ## 1. Purpose
 
-The function <i>define_muscleroi_us</i> is used is used to visualize ultrasound images and other structures, including the muscle mask, aponeurosis definition, and/or the fiber tracts, in the MuscleUS_Toolbox.  
-
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
+The function <i>fiber_visualizer_us</i> is used is used to visualize ultrasound images and other structures, including the muscle mask, aponeurosis definition, and/or the fiber tracts, in the MuscleUS_Toolbox.  
 
 ## 2. Usage
 The user can call fiber_visualizer from the command line.  In addition, <i>read_dicom_us</i>, <i>fiber_track</i>, and <i>fiber_smoother_us</i>, can be configured to call <i>fiber_visualizer</i> from within the functions, so that the image, mask, aponeurosis definition, and fiber tracts can be automatically plotted.  
 
-The user provides a double precision B-mode image, a matrix of fiber-tracts, a structure containing ROI definitions, and a structure containing visualization options. The image and user-selected options are displayed.
-
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
+The user provides a double precision B-mode image, a matrix of fiber-tracts, a structure containing ROI definitions, and a structure containing visualization options. The image and user-selected options are displayed. 
 
 ## 3. Syntax
 The function define_muscleroi_us is called using the following syntax:
@@ -28,7 +24,7 @@ The function define_muscleroi_us is called using the following syntax:
 us_figure = fiber_visualizer_us(image_doub, fv_options, fiber_all, roi_struc);
 
 The input arguments are:
-* <i>image_doub</i>: A grayscale, B-mode image at double-precision. 
+* <i>image_gray</i>: A grayscale, B-mode image at double-precision. 
 
 * <i>fv_options</i>: A structure containing the fololowing fields:
 
@@ -50,8 +46,6 @@ The input arguments are:
 
 The output arguments are:
 * <i>us_figure</i>: A MATLAB figure structure
-   
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
 
 ## 4. Example Code
 
@@ -73,11 +67,7 @@ fv_options.mask_color=[1 0 1];                                              %mas
 
 us_figure = fiber_visualizer_us(image_gray, fv_options, fiber_all_pixels, roi_struc);
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
-
 ## 5. Acknowledgements
 People: Bruce Damon
 
 Grants: NIH/NIAMS R01 AR073831
-
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md)
