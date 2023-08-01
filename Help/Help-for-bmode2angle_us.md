@@ -20,8 +20,10 @@ The function bmode2angle_us is used to estimate muscle fascicle orientations in 
 * Vesselness filtering:
   * A series of Gaussian blurring steps with increasing std. deviations for the Gaussian function; for each one, the vesselness response of the structures is calculated.
   * Determination of the maximum vesselness response
-* Determination of local fasicle orientation.  First, an anisotropic wavelet is convolved with the vesselness-filtered image at a user-specified range of orientations. The angle at which the maximum convolution of the wavelet with the image is taken as the fascicle orientation. A mask is formed from the vesselness image and used to eliminate signals from areas of low vesselness response. The median angle, across grid squares of user-defined dimensions, is taken and its vector components are calculated.
-
+* Determination of local fasicle orientation
+  * An anisotropic wavelet is convolved with the vesselness-filtered image at a user-specified range of orientations. The angle at which the maximum convolution of the wavelet with the image is taken as the fascicle orientation.
+  * A mask is formed from the vesselness image and used to eliminate signals from areas of low vesselness response.
+  * The median angle, across grid squares of user-defined dimensions, is taken and its vector components are calculated.
 The function returns the vesselness images, spatial maps of fascicle orientations, and images for quality assurance/inspection, as described below.
 * Spatial maps of fascicle orientations, including
   * An image of fascicle oreintations within the user-defined ROI, at the original image resolution
