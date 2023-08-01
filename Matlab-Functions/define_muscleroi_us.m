@@ -20,7 +20,7 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %  time-saving step to obviate re-defining the muscle boundaries.
 %
 %  After each step, the user can inspect and verify these definitions
-%  before advancing.
+%  before advancing. An instruction in the command window will prompt the user.
 
 %
 %INPUT ARGUMENT
@@ -69,6 +69,7 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %  v. 1.0.0 (August 1, 2023): Initial release
 %
 %ACKNOWLEDGEMENTS
+%  People: Bruce Damon, Hannah Kilpatrick
 %  Grant support: NIH/NIAMS R01 AR073831
 
 %% get options
