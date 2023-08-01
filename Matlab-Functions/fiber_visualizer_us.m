@@ -34,6 +34,9 @@ function us_figure = fiber_visualizer_us(image_gray, fv_options, fiber_all, roi_
 %       indicate the color of the muscle region of interest
 %    -.roi_color: Required when plot_roi = 1. A 1x3 vector used to indicate 
 %       the color of the aponeurosis region of interest
+%    -.skip_tracts: Allows the user to omit tracts for plotting.  If 
+%       skip_tracts is set to 1, all tracts will be plotted.  If
+%       skip_tracts is set to 2, every other tract will be plotted.  Etc.
 %
 %  fiber_all (optional): The fiber tracts to be displayed; required when 
 %    plot_tracts=1.
@@ -68,7 +71,7 @@ if fv_options.plot_tracts==1
     end
     for k = 1:plot_interval:length(fiber_all(:,1,1))
 
-        %get fiber tract poins
+        %get fiber tract points
         loop_c = nonzeros(squeeze(fiber_all(k,:,2)));
         loop_r = nonzeros(squeeze(fiber_all(k,:,1)));
 
