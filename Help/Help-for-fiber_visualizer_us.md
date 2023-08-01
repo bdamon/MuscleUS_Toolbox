@@ -38,7 +38,9 @@ The input arguments are:
  
     <i>.mask_color</i>: Required when plot_mask = 1. A 1x3 vector used to indicate the color of the muscle mask 
  
-    <i>.roi_color</i>: Required when plot_roi = 1. A 1x3 vector used to indicate the color of the aponeurosis region of interest 
+    <i>.roi_color</i>: Required when plot_roi = 1. A 1x3 vector used to indicate the color of the aponeurosis region of interest
+  
+    <i>.skip_tracts</i> (optional): Allows the user to omit tracts for plotting.  If skip_tracts is set to 1, all tracts will be plotted.  If skip_tracts is set to 2, every other tract will be plotted.  Etc. Can be useful when fibers were tracked from high density seed points.
 
 * <i>fiber_all</i>: The fiber tracts to be displayed; required when plot_tracts=1. 
 
