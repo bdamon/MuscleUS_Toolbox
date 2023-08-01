@@ -35,8 +35,8 @@ function [image_data_struc, image_info_struc] = read_dicom_us(input_structure)
 %      columns x color layer (for RGB and YCbCr formats). Depending on the
 %      acquisition details, there may be a fourth dimension, usually time.
 %   -.orig.native.doub: The original images converted to double precision
-%   -.orig.native.norm: The original images converted to a signal range of
-%      0-1
+%   -.orig.native.norm: The double precision images converted to a signal 
+%      range of 0-1
 %   -gray: The images converted to grayscale
 %   -rbg: The images converted to RGB format
 %
