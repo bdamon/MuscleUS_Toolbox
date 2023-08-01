@@ -130,34 +130,54 @@ the following code will allow the user to
 
 
 %set processing options
-b2a_options.stdev_1 = 0.5;
-b2a_options.stdev_2 = 3.0;
-b2a_options.gauss_size = 13;
-b2a_options.stdev_inc = 0.5;
-b2a_options.min_angle = 155;  
-b2a_options.max_angle = 200;   
-b2a_options.num_angles = 46;
-b2a_options.vessel_beta =0.75;
-b2a_options.vessel_c = 1-b2a_options.vessel_beta;
-b2a_options.wavelet_damp = 2.5;
-b2a_options.wavelet_freq = 6;
-b2a_options.wavelet_kernel = 13;
-b2a_options.otsu = 1;
+b2a_options.stdev_1 = 0.5; 
+
+b2a_options.stdev_2 = 3.0; 
+
+b2a_options.gauss_size = 13; 
+
+b2a_options.stdev_inc = 0.5; 
+
+b2a_options.min_angle = 155; 
+
+b2a_options.max_angle = 200; 
+
+b2a_options.num_angles = 46; 
+
+b2a_options.vessel_beta =0.75; 
+
+b2a_options.vessel_c = 1-b2a_options.vessel_beta; 
+
+b2a_options.wavelet_damp = 2.5; 
+
+b2a_options.wavelet_freq = 6; 
+
+b2a_options.wavelet_kernel = 13; 
+
+b2a_options.otsu = 1; 
+
 b2a_options.num_pixels = [30 45];
 
 %convert b-mode image to angle image
-image_gray = image_data_struc.gray;
+image_gray = image_data_struc.gray; 
 
 [angle_image, masked_angle_image, angle_image_grid, vector_image, vesselness_mask, vesselness_max, max_cvn_image, cvn_images, sample_wavelet] = 
-bmode2angle_us(image_data_struc.gray, image_data_struc.mask, b2a_options);
+bmode2angle_us(image_data_struc.gray, image_data_struc.mask, b2a_options); 
 
 %display the fascicle orientation image:
+
 figure
+
 imagesc(vesselness_max)
+
 axis image
+
 caxis([0 1])
-clrbr=colorbar;
+
+colorbar
+
 axis image
+
 set(gcf, 'Units', 'normalized', 'Position', [0.1000    0.1000    0.8000    0.7000])
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
