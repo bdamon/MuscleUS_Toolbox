@@ -39,8 +39,8 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %    -.def_roi: Set to 1 to define the aponeurosis region
 %    -.def_muscle: Set to 1 to define the muscle.  If set to 0, a pre-existing
 %      muscle definition mask, including vertex locations, must be input as 
-%      dmr_options.mask, dmr_options.temp_roi_c_pixels, and 
-%      dmr_options.temp_roi_r_pixels
+%      dmr_options.mask, dmr_options.muscle_c_pixels, and 
+%      dmr_options.muscle_r_pixels
 %
 %OUTPUT ARGUMENTS
 %  image_data_struc: The input structure, plus the following additional
