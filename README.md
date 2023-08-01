@@ -51,7 +51,7 @@ Fiber tract points are subject to errors in position because of the presence of 
 After the fiber tracts have been polynomial-fitted, their structural properties are quantified using the function [<i>fiber_quantifier_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Matlab-Functions/fiber_quantifier_us.m).  The properties quantified include the pennation angle, curvature, and length. These properties are calculated in a pointwise manner along the fiber tracts. Follow [this link](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_quantifier_us.md) for detailed help on this function.
 
 ### G. Visualize the results using the function <i>fiber_visualizer_us</i>
-At any stage, the results can be visualized using the function [<i>fiber_visualizer_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Matlab-Functions/fiber_visualizer_us.m). The user can select the mask, seed surface, and/or fiber tracts for display.  The user can also select which image slices to display for anatomical reference. Follow [this link](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md) for detailed help on this function.
+At any stage, the results can be visualized using the function [<i>fiber_visualizer_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Matlab-Functions/fiber_visualizer_us.m). The user can select the mask, seed surface, and/or fiber tracts for display. Follow [this link](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md) for detailed help on this function.
 
 ## 6. Other Resources
 ### A. Within the toolbox:
