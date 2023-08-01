@@ -160,15 +160,15 @@ image_gray = image_data_struc.gray;
 [angle_image, masked_angle_image, angle_image_grid, vector_image, vesselness_mask, vesselness_max, max_cvn_image, cvn_images, sample_wavelet] = 
 bmode2angle_us(image_data_struc.gray, image_data_struc.mask, b2a_options); 
 
-%display the fascicle orientation image:
+%display a masked version of the gridded fascicle orientation image:
 
 figure
 
-imagesc(vesselness_max)
+imagesc(angle_image_grid.*image_data_struc.mask)
 
 axis image
 
-caxis([0 1])
+caxis([155 200])
 
 colorbar
 
