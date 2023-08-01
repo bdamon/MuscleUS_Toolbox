@@ -70,10 +70,10 @@ if exist('input_structure', 'var')
 
 else
 
-    [input_file_name, input_path_name] = uigetfile('*.DCM', 'Select any .DCM file');
+    [input_file_name, input_path_name] = uigetfile('*.*', 'Select any DICOM-formatted ultrasound imaging file');
     [output_file_name, output_path_name] = uiputfile('*.mat', 'Specify output file directory and name');
 
-    show_image = 0;
+    show_image = 1;
 
 end
 
