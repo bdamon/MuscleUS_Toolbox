@@ -118,9 +118,9 @@ close all
 
 [penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quantifier_us(smoothed_fiber_all_mm, roi_struc, image_info_struc);
 
-% to visualize curvature values using a color scale (blue = 0, red = 3 m^-1)
+% to visualize curvature values using a color scale (blue = 0, red = maximum)
 fv_options.tract_color = zeros(length(curvature_mean), 3);
-fv_options.tract_color(:,1) = curvature_mean/3;
+fv_options.tract_color(:,1) = curvature_mean/max(curvature_mean);
 fv_options.tract_color(:,3) = 1 - fv_options.tract_color(:,1);
 
 curvature_figure = fiber_visualizer_us(image_data_struc.gray(:,:,1), fv_options, smoothed_fiber_all_pixels, roi_struc);
