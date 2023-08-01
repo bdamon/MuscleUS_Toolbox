@@ -14,14 +14,11 @@ This help file contains information about
 
 The function <i>read_dicom_us</i> is used to open ultrasound image files in the MuscleUS_Toolbox
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md)
 
 ## 2. Usage
 File I/O and other options can be set using the optional input argument input_structure.  If input_structure is not included, the user is prompted to select the input and output file names.
 
 Structures containing the image(s) (in several formats) and the image metadata are returned.
-
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md)
 
 ## 3. Syntax
 The function read_dicom_us is called using the following syntax:
@@ -42,18 +39,20 @@ The input argument is:
     <i>.show_image</i>: A flag to view the image (1=yes, 0=no). If the image data is 4D, the first image of the data series is shown. If input_structure is not included as an input argument, <i>show_image</i> is set to zero by default. 
 
 If no input arguments are included, the user is prompted to select the input file and create an output file name.
+
 The output arguments are:
+
 * <i>image_data_struc</i>: The imaging data, with the following fields:
    
     <i>.orig.native</i>: The original DICOM image(s), with dimensions of rows x columns x color layer (for RGB and YCbCr formats). Depending on the acquisition details, there may be a fourth dimension, usually time.
   
+    <i>.orig.native.doub</i>: The original DICOM image(s) converted to double precision.
+  
+    <i>.orig.native.norm</i>: The double precision image(s) converted to a signal range of 0-1.
+
     <i>.gray</i>: The original images converted to gray scale
   
     <i>.rgb</i>: The original images converted to RGB format
-   
-    <i>.orig.native</i>: The original DICOM image(s), with dimensions of rows x columns x color layer (for RGB and YCbCr formats). Depending on the acquisition details, there may be a fourth dimension, usually time.
-  
-    <i>.orig.native.doub</i>: The original images converted to double precision
     
 * <i>image_info_struc</i>: The contents of the DICOM file header, plus:
    
@@ -61,8 +60,10 @@ The output arguments are:
   
     <i>.PixelSpacingX (and Y, R, C)</i>: The pixel spacing, in mm, in the X, Y, row (=Y), and column (=X) directions
     
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md)
+    <i>.RegionLocation</i>: The pixel locations within the image that contain the imaged anatomy (given as [minX maxX minY maxY])
 
+    <i>FieldOfView</i>: the number of pixels in the X and Y directions, times the corresponding pixel spacings
+  
 ## 4. Example Code
 
 % set file I/O options:
@@ -81,11 +82,8 @@ input_structure.show_image = 1;
 
 [image_data_struc, image_info_struc] = read_dicom_us(input_structure);
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md)
-
 ## 5. Acknowledgements
-People: Bruce Damon, Hannah Kilpatrick
+People: Bruce Damon
 
 Grants: NIH/NIAMS R01 AR073831
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md)
