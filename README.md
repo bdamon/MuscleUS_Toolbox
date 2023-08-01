@@ -60,3 +60,5 @@ At any stage, the results can be visualized using the function [<i>fiber_visuali
 * [Here's a link to templates for submitting feature requests and bug reports](https://github.com/bdamon/MuscleUS_Toolbox/tree/master/Issues)
 
 ### B. External to the toolbox:
+* Here's the [PubMed link](https://pubmed.ncbi.nlm.nih.gov/19646699/) for the paper with the algorithm for modeling fascicle orientation that we used.
+* Our paper describing this mehtod is in press and will be linked here as soon as the preprint is available.
