@@ -87,9 +87,9 @@ The input arguments are:
     
   * Parameters describing the formation of the vesselness mask using either Otsu's method of k-means clustering:
   
-    <i>.max_angle</i>: The multiplier for Otsu's threshold in the vesselness-masked images, when Otsu's method is used to filter the image. For example, setting b2a_options.otsu to 1 uses the threshold set by Otsu's method.  Setting b2a_options.otsu to 0.5 uses 1/2 of this threshold.
+    <i>.otsu</i>: The multiplier for Otsu's threshold in the vesselness-masked images, when Otsu's method is used to filter the image. For example, setting b2a_options.otsu to 1 uses the threshold set by Otsu's method.  Setting b2a_options.otsu to 0.5 uses 1/2 of this threshold.  
   
-    <i>.k</i>: A two-element vector with the number of clusters and the ordinal rank, of the cluster to be used, when k-means clustering is used to filter the image
+    <i>.k</i>: A two-element vector with the number of clusters and the ordinal rank, of the cluster to be used, when k-means clustering is used to filter the image. Note that the conditional logic is configured such that Otsu's method will be used if there is a subfield to b2a_options called otsu. If you want to use k-means clustering, ensure that there is NOT a field called otsu.
 
 The output arguments are:
 
