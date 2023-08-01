@@ -114,7 +114,7 @@ The output arguments are:
 
 * sample_wavelet: The wavelet use to determine fascicle orientation
  
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md#Help for the function <i>bmode2angle_us</i>, v. 1.0.0)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md#Help)
 
 ## 4. Example Code
 Given:
