@@ -18,7 +18,7 @@ This work was supported by NIH grant NIH/NIAMS R01 AR073831. By using this softw
 This work is covered under a [GNU General Public License](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/LICENSE.md), v. 3 or later.
 
 ## 3. MATLAB Requirements
-The functions have been tested using MATLAB v. 2021 b, Reelase 2.  The toolbox consists primarily of custom-written functions, but also calls MATLAB functions in the base package and the image processing toolbox.
+The functions have been tested using MATLAB v. 2021 b, Release 2.  The toolbox consists primarily of custom-written functions, but also calls MATLAB functions in the base package and the image processing toolbox.
 
 ## 4. Overview of a Typical Workflow
 ### A. Open the image using <i>read_dicom_us</i>.
