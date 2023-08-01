@@ -28,7 +28,7 @@ To begin the session, a DICOM-formatted ultrasound file is opened.  The function
 Real muscle fibers are assumed to be contained entirely within a single muscle of interest. The function [<i>define_muscleroi_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Matlab-Functions/define_muscleroi_us.m) is therefore used to create a binary image mask demarcating the muscle boundaries; this mask is used to restrict analyses to the region of interest within the muscle. The tracts are propagated from a set of points, commonly called "seed points." In the MuscleUS_Toolbox, the anatomical structure into which the muscle fibers insert (a flattened tendinous structure called an aponeurosis) is used to define these points. Follow [this link](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md) for detailed help on this function.
 
 ### C. Calculate the fiber orientations using the function <i>bmode2angle_us</i>
-Using the B-mode image, the muscle fascicles orientations are estimated using the algorithm presented by Rana et al., (<i>J Biomech</i>, 42:2068,2009). The images are processed using the following steps: 
+Using the B-mode image, the muscle fascicles orientations are estimated using the algorithm presented by Rana et al., (<i>J Biomech</i>, <b>42</b>:2068, 2009). The images are processed using the following steps: 
 
 * Vesselness filtering:
   * A series of Gaussian blurring steps of varying sizes
