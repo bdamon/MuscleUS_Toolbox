@@ -37,8 +37,10 @@ The input arguments are:
 
     <i>.roi_resolution</i>: The desired distance between fiber tracking seed points, in mm
   
-    <i>.frame_num</i>: The frame number within the image data series to be analyzed. If the data containing a time series, this is the frame number. If there is only one image, use 1. 
+    <i>.frame_num</i>: The frame number within the image data series to be analyzed. If the data containing a time series, this is the frame number. If there is only one image, use 1.
+  
     <i>.def_roi</i>: Set to 1 to define the aponeurosis region
+  
     <i>.def_muscle</i>: Set to 1 to define the muscle.  If set to 0, a pre-existing muscle definition mask, including vertex locations, must be input as dmr_options.mask, dmr_options.muscle_c_pixels, and dmr_options.muscle_r_pixels
 
 The output arguments are:
