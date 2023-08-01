@@ -70,11 +70,11 @@ The output arguments are:
 
 input_structure.input_path_name = 'S:\Muscle_DTI\Ultrasound_sample_images\Sample_US_2022.3.4';
 
-input_structure.input_file_name = 'TA_4';
+input_structure.input_file_name = 'US_0003__130903';
 
 input_structure.output_path_name = input_structure.input_path_name;
 
-input_structure.output_file_name =  'TA_4_output.mat';
+input_structure.output_file_name =  'US_0003__130903_output.mat';
 
 input_structure.show_image = 1;
 
