@@ -3,7 +3,7 @@ function [image_data_struc, roi_struc] = define_muscleroi_us(image_data_struc, i
 %FUNCTION define_muscle_roi
 %  [image_data_struc, roi_struc] = define_muscle_roi(image_data_struc, image_info_struc, dmr_options);
 %
-%USAGE
+%USAGE 
 %  The function define_muscleroi_us is used to define regions of interest in
 %  the MuscleUS_Toolbox. An image is displayed and the user is prompted to
 %  define the muscle region of interest using the roipoly tool. The resulting
