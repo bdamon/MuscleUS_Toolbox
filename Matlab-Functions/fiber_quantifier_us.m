@@ -26,7 +26,7 @@ function [penn_mean, tract_lengths, curvature_mean, curvature_all] = fiber_quant
 % 
 %    -Curvature: The method for curvature measurements is adapted from Damon 
 %     et al, Magn Reson Imaging 2012. Briefly, these use a discrete 
-%     implementation of the Frenet-Serret equations; the curvature K is 
+%     implementation of the Frenet-Serret equations. The curvature K is 
 %     defined in
 %       dT/ds = K N
 %     where T is the tangent line to points along the curve, s is the step 
@@ -95,8 +95,8 @@ for tract_cntr = 2:(num_tracts-1)
     track_length_mm = [0; cumsum((diff(loop_track_mm(:,1)).^2 + diff(loop_track_mm(:,2)).^2).^0.5)];
     tract_lengths(tract_cntr) = max(track_length_mm);
     
-    if max(track_length_mm)>=5                                              % start of if statement: only characterize tracts at least 5 mm length
-        index_5mm = find(track_length_mm>=5, 1);
+    if max(track_length_mm)>=10                                              % start of if statement: only characterize tracts at least 10 mm length
+        index_5mm = find(track_length_mm>=10, 1);
         
         %calculate pennation angle
         apo_vector(tract_cntr,1:2) = ...                                    % position vector between points on aponeurosis
