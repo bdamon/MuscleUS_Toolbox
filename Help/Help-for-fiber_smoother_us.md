@@ -62,7 +62,7 @@ fs_options.interp_distance = 0.1;   %interpolate fitted tracts at 0.1 mm spacing
 % call the function:
 
 [smoothed_fiber_all_pixels, smoothed_fiber_all_mm, coeff_c_pixels, coeff_r_pixels, coeff_x_mm, coeff_y_mm] = ...
-    fiber_smoother_us(fiber_all, image_info_struc, fs_options, image_gray, roi_struc, fv_options);
+    fiber_smoother_us(fiber_all_pixels, image_info_struc, fs_options, image_gray, roi_struc, fv_options);
   
 
   
