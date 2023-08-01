@@ -3,7 +3,7 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image, vesse
 %FUNCTION bmode2angle_us
 %  [angle_image, masked_angle_image, angle_image_grid, vector_image, vesselness_mask, vesselness_max, max_cvn_image, cvn_images, sample_wavelet] = 
 %    bmode2angle_us(image_gray, mask, b2a_options)
-%
+% 
 %USAGE
 %  The function bmode2angle_us is used to estimate muscle fascicle
 %  orientations in the MuscleUS_Toolbox. The user provides a B-mode image,
