@@ -1,4 +1,4 @@
-# Help for the function <i>bmode2angle_us</i>, v. 0.1.x
+# Help for the function <i>bmode2angle_us</i>, v. 1.0.0
 
 ## Introduction
 
@@ -73,7 +73,7 @@ The input arguments are:
    
     <i>.wavelet_kernel</i>: The kernel size of the wavelet, in pixels
    
-    <i>.wavelet_freq</i>: he expected spatial frequency of the fascicles, pixels<sup>-1</sup>
+    <i>.wavelet_freq</i>: The expected spatial frequency of the fascicles, pixels<sup>-1</sup>
   
     <i>.wavelet_freq</i>: The row x column dimensions of the Gaussian blurring window, in pixels
     
@@ -114,7 +114,7 @@ The output arguments are:
 
 * sample_wavelet: The wavelet use to determine fascicle orientation
  
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
+[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md#Help for the function <i>bmode2angle_us</i>, v. 1.0.0)
 
 ## 4. Example Code
 Given:
