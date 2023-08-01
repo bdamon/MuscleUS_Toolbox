@@ -103,7 +103,7 @@ function [angle_image, masked_angle_image, angle_image_grid, vector_image, vesse
 %  v. 1.0.0 (August 1, 2023): Initial release after paper accepted by J Appl Biomch
 %
 %ACKNOWLEDGEMENTS
-%  People: Emily Bush, Ke Li, Hannah Kilpatrick, Bruce Damon
+%  People: Emily Bush, Ke Li, Hannah Kilpatrick, Bruce Damon, Zhaohua Ding
 %  Grant support: NIH/NIAMS R01 AR073831
 
 %% MAIN FUNCTION is bmode2angle
