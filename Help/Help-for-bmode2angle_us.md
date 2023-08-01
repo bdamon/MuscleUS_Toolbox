@@ -25,13 +25,18 @@ The function bmode2angle_us is used to estimate muscle fascicle orientations in 
   * A mask is formed from the vesselness image and used to eliminate signals from areas of low vesselness response.
   * The median angle, across grid squares of user-defined dimensions, is taken and its vector components are calculated.
 The function returns the vesselness images, spatial maps of fascicle orientations, and images for quality assurance/inspection, as described below.
+
+
+The function returns:
 * Spatial maps of fascicle orientations, including
   * An image of fascicle oreintations within the user-defined ROI, at the original image resolution
   * A vesselness-masked masked angle image image at the original resolution
   * An image containing the median angles within the grid squares
-  * An image with the components of unit vectors indicating the fascicle orientations, within the grid squares.
-  * Images for QA purposes, including 1) The convolution images and 2) A sample wavelet
-Angles are specified as a counterclockwise rotation from the right side of the image = 0⁰, as in the figure below.
+* An image with the components of unit vectors indicating the fascicle orientations, within the grid squares.
+* Images for QA purposes, including 
+  * The convolution images
+  * A sample wavelet
+Angles are specified as a counterclockwise rotation from the right side of the image = 0⁰.
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
 
