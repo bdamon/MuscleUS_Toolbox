@@ -44,9 +44,13 @@ function [image_data_struc, image_info_struc] = read_dicom_us(input_structure)
 %   -dynamics: the number of images in the time series
 %   -PixelSpacingX (and Y, R, C): The pixel spacing, in mm, in the X, Y,
 %     row (=Y), and column (=X) directions
+%   -RegionLocation: The pixel locations within the image that contain the
+%     imaged anatomy (given as [minX maxX minY maxY])
+%   -FieldOfView: the number of pixels in the X and Y directions, times the
+%     corresponding pixel spacings
 %
 %VERSION INFORMATION
-%  v. 0.1
+%  v. 1.0.0 (8/1/23) Bruce Damon
 %
 %ACKNOWLEDGEMENTS
 %  People: Bruce Damon
@@ -138,16 +142,24 @@ elseif image_type=='Y'                                                      %if 
 
 end
 
-% put pixel spacing in an easily accessible place
+% put pixel spacing, region location, and field of view in easily accessible places
 image_info_struc.PixelSpacingX = image_info_struc.SequenceOfUltrasoundRegions.Item_1.PhysicalDeltaX/1E-1; %convert to mm; X
 image_info_struc.PixelSpacingY = image_info_struc.SequenceOfUltrasoundRegions.Item_1.PhysicalDeltaY/1E-1; %convert to mm; Y
 image_info_struc.PixelSpacingR = image_info_struc.SequenceOfUltrasoundRegions.Item_1.PhysicalDeltaY/1E-1; %convert to mm; rows (=Y)
 image_info_struc.PixelSpacingC = image_info_struc.SequenceOfUltrasoundRegions.Item_1.PhysicalDeltaX/1E-1; %convert to mm; cols (=X)
 
+image_info_struc.RegionLocation = [image_info_struc.SequenceOfUltrasoundRegions.Item_1.RegionLocationMinX0 ...
+    image_info_struc.SequenceOfUltrasoundRegions.Item_1.RegionLocationMaxX1...
+    image_info_struc.SequenceOfUltrasoundRegions.Item_1.RegionLocationMinY0 ...
+    image_info_struc.SequenceOfUltrasoundRegions.Item_1.RegionLocationMaxY1];
+
+image_info_struc.FieldOfView = [(image_info_struc.RegionLocation(2) - image_info_struc.RegionLocation(1))*image_info_struc.PixelSpacingX ...
+    (image_info_struc.RegionLocation(4) - image_info_struc.RegionLocation(3))*image_info_struc.PixelSpacingY];
+  
 %% Save data
 
 cd(output_path_name)
-% save(output_file_name)
+save(output_file_name)
 
 %% Show images
 
