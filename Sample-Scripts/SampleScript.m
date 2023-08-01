@@ -125,10 +125,3 @@ fv_options.tract_color(:,3) = 1 - fv_options.tract_color(:,1);
 
 curvature_figure = fiber_visualizer_us(image_data_struc.gray(:,:,1), fv_options, smoothed_fiber_all_pixels, roi_struc);
 
-
-
-
-
-
-
-
