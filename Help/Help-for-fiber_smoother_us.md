@@ -39,7 +39,7 @@ The input arguments are:
   
   <i>.poly_order</i>: A 2-element vector containing the polynomial orders, [N<sub>R</sub> N<sub>C</sub>], to use when fitting the tracts
 
-* <i>image_doub, roi_struc</i> (optional): The double-precision image and a structure containing information about the aponeurosis surface. If included, [<i>fiber_visualizer_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md) is automatically called so that the smoothed tracts can be visualized.
+* <i>image_doub, roi_struc, fv_options</i> (optional): The double-precision image and a structure containing information about the aponeurosis surface. If included, [<i>fiber_visualizer_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_visualizer_us.md) is automatically called so that the smoothed tracts can be visualized.
 
 The output arguments are:
 
