@@ -412,4 +412,3 @@ H(:, :, 2, 2) = Gyy;
 
 %% end the function
 return;
-
