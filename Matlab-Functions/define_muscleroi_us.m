@@ -155,7 +155,7 @@ if def_roi==1
         plot(temp_roi_c_pixels, temp_roi_r_pixels, 'c')                         %shows mask positions
 
         %user interacts with image
-        title('Zoom image')
+        title('Zoom image to highlight aponeurosis; Press Enter when done')
         zoom on
         pause
         title('Define surface for seed points using left mouse clicks; Press right mouse button when finished')
