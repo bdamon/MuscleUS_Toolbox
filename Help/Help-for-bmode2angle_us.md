@@ -42,17 +42,17 @@ Angles are specified as a counterclockwise rotation from the right side of the i
 
 ## 3. Syntax
 
-[angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_doub, mask, b2a_options);
+[angle_image, masked_angle_image, angle_image_grid, vector_image, vesselness_mask, vesselness_max, max_cvn_image, cvn_images, sample_wavelet] = 
+ bmode2angle_us(image_gray, mask, b2a_options);
 
 The input arguments are:
  
-* <i>image_doub</i>: A grayscale, B-mode image at double-precision
+* <i>image_gray</i>: A grayscale, B-mode image at double-precision
 
 * <i>mask</i>: The output of define_muscleroi_us
 
 * <i>b2a_options</i>: A structure containing the following processing options:
-* 
-  Parameters describing the Gaussian convolution:
+  * Parameters describing the Gaussian convolution:
   
     <i>.stdev_1</i>: The minimum standard deviation of the Gaussian blurring window, in pixels
 
