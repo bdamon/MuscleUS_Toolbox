@@ -13,7 +13,7 @@ function [fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc,
 %  used to describe muscle fascicle orientation, at a user-defined step size.
 %
 %  The outputs include a matrix containing fiber tracts, with units of
-%  pixels; and a vector containing the reason for fiber tract stoppage.  
+%  pixels; and a vector containing the reason for fiber tract termination.  
 %
 %INPUT ARGUMENT
 %  vector_image: A spatial map of X and Y vector components of the fascicle
