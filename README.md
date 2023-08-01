@@ -22,7 +22,7 @@ The functions have been tested using MATLAB v. 2021 b, Release 2.  The toolbox c
 
 ## 4. Overview of a Typical Workflow
 ### A. Open the image using <i>read_dicom_us</i>.
-To begin the session, a DICOM-formatted ultrasound file is opened.
+To begin the session, a DICOM-formatted ultrasound file is opened.  The function [<i>read_dicom_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Matlab-Functions/read_dicom_us.m) will prepare image data and information structures in the form expected by subsequent functions.  Help is available [here](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-read_dicom_us.md).
 
 ### B. Define muscle boundaries and the aponeurosis using the function <i>define_muscleroi_us</i>
 Real muscle fibers are assumed to be contained entirely within a single muscle of interest. The function [<i>define_muscleroi_us</i>](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Matlab-Functions/define_muscleroi_us.m) is therefore used to create a binary image mask demarcating the muscle boundaries; this mask is used to restrict analyses to the region of interest within the muscle. The tracts are propagated from a set of points, commonly called "seed points." In the MuscleUS_Toolbox, the anatomical structure into which the muscle fibers insert (a flattened tendinous structure called an aponeurosis) is used to define these points. Follow [this link](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-define_muscleroi_us.md) for detailed help on this function.
