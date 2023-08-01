@@ -130,6 +130,7 @@ the following code will allow the user to
 
 
 %set processing options
+
 b2a_options.stdev_1 = 0.5; 
 
 b2a_options.stdev_2 = 3.0; 
