@@ -13,8 +13,6 @@ This help file contains information about
  
 The function <i>bmode2angle_us</i> is used to estimate muscle fascicle orientations in the MuscleUS_Toolbox.
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
-
 ## 2. Usage
 The function bmode2angle_us is used to estimate muscle fascicle orientations in the MuscleUS_Toolbox. The user provides a B-mode image, the mask defining the region of interest in the image, and a structure containing options for estimating the fascicle orientations. The fascicle orientations are estimated using an algorithm presented by Rana et al., (J Biomech, 42:2068, 2009), in which the images are processed using
 * Vesselness filtering:
@@ -35,9 +33,8 @@ The function returns:
 * Images for QA purposes, including 
   * The convolution images
   * A sample wavelet
-Angles are specified as a counterclockwise rotation from the right side of the image = 0⁰.
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
+Angles are specified as a counterclockwise rotation from the right side of the image = 0⁰.
 
 ## 3. Syntax
 
@@ -113,8 +110,6 @@ The output arguments are:
 * cvn_images: All of the convolution images
 
 * sample_wavelet: The wavelet use to determine fascicle orientation
- 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md#Help)
 
 ## 4. Example Code
 Given:
@@ -181,11 +176,7 @@ axis image
 
 set(gcf, 'Units', 'normalized', 'Position', [0.1000    0.1000    0.8000    0.7000])
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
-
 ## 5. Acknowledgements
  People: Emily Bush, Ke Li, Hannah Kilpatrick, Bruce Damon
  
  Grant support: NIH/NIAMS R01 AR073831
-
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
