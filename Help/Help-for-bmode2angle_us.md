@@ -26,7 +26,6 @@ The function bmode2angle_us is used to estimate muscle fascicle orientations in 
   * The median angle, across grid squares of user-defined dimensions, is taken and its vector components are calculated.
 The function returns the vesselness images, spatial maps of fascicle orientations, and images for quality assurance/inspection, as described below.
 
-
 The function returns:
 * Spatial maps of fascicle orientations, including
   * An image of fascicle oreintations within the user-defined ROI, at the original image resolution
@@ -114,7 +113,7 @@ The output arguments are:
 * cvn_images: All of the convolution images
 
 * sample_wavelet: The wavelet use to determine fascicle orientation
-* 
+ 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
 
 ## 4. Example Code
@@ -124,44 +123,56 @@ Given:
 the following code will allow the user to 
 
 1.	Define a Gaussian kernel with standard deviations of 1.5-3 pixels and kernel size 30x30, in SD increments of 0.5 pixels
-2.	Estimate the vesselness response with coefficients  and C of 0.5
-3.	Create an anisotropic wavelet with damping coefficient = 2.5622 and kernel size of 26x26, a spatial frequency for the fascicles of 20 pixels, across angles of -135 to -225 degrees, in steps of 1 degree
-4.	Smooth the values using a median filter, in grids of 60x60
+2.	Estimate the vesselness response with coefficients Beta = 0.75 and C=0.25
+3.	Create an anisotropic wavelet with damping coefficient = 2.5, wavelet frequency = 6, kernel size of 26x26, across angles of 155 to 200 degrees, in steps of 1 degree
+4.	Form a vesselness mask using the threshold set by Otsu's method
+5.	Smooth the values using a median filter, in grids of 30x45
 
 
 %set processing options
+b2a_options.stdev_1 = 0.5;
 
-b2a_options.stdev_1 = 1.5;
+b2a_options.stdev_2 = 3.0;
 
-b2a_options.stdev_2 = 3; 
+b2a_options.gauss_size = 13;
 
 b2a_options.stdev_inc = 0.5;
 
-b2a_options.gauss_size = 15;
+b2a_options.min_angle = 155;  
 
-b2a_options.vessel_beta = 0.5; 
+b2a_options.max_angle = 200;   
 
-b2a_options.vessel_c = 0.5;
+b2a_options.num_angles = 46;
 
-b2a_options.wavelet_damp = 2.5622;
+b2a_options.vessel_beta =0.75;
 
-b2a_options.wavelet_kernel = 25;
+b2a_options.vessel_c = 1-b2a_options.vessel_beta;
 
-b2a_options.wavelet_freq = 20;
+b2a_options.wavelet_damp = 2.5;
 
-b2a_options.min_angle = -135;
+b2a_options.wavelet_freq = 6;
 
-b2a_options.max_angle = -225;
+b2a_options.wavelet_kernel = 13;
 
-b2a_options.num_angles = 91;
+b2a_options.otsu = 1;
 
-b2a_options.num_pixels = 60;
+b2a_options.num_pixels = [30 45];
 
 %convert b-mode image to angle image
 
 image_gray = image_data_struc.gray(:,:);
 
-[angle_image, masked_angle_image, angle_image_grid, vector_image] = bmode2angle_us(image_gray, image_data_struc.mask, b2a_options);
+[angle_image, masked_angle_image, angle_image_grid, vector_image, vesselness_mask, vesselness_max, max_cvn_image, cvn_images, sample_wavelet] = ...
+    bmode2angle_us(image_data_struc.gray, image_data_struc.mask, b2a_options);
+
+%display the fascicle orientation image:
+figure
+imagesc(vesselness_max)
+axis image
+caxis([0 1])
+clrbr=colorbar;
+axis image
+set(gcf, 'Units', 'normalized', 'Position', [0.1000    0.1000    0.8000    0.7000])
 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
 
