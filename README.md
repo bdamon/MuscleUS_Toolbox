@@ -55,11 +55,10 @@ At any stage, the results can be visualized using the function [<i>fiber_visuali
 
 ## 6. Other Resources
 ### A. Within the toolbox:
-* Downloading code and data: The easiest way to do this is to click once on the green Code button.  Select the "Download ZIP" option.
-* Data: The file named "US_0003__130903" is a DICOM-formatted ultrasound image file suitable for test out the code
+* Downloading code and data: The easiest way to do this is to click once on the green Code button.  Select the "Download ZIP" option. The file named "US_0003__130903" is a DICOM-formatted ultrasound image file suitable for test out the code
 * [Here's a direct link to all of the MATLAB functions](https://github.com/bdamon/MuscleUS_Toolbox/tree/master/Matlab-Functions)
 * [Here's a direct link to all of the help files](https://github.com/bdamon/MuscleUS_Toolbox/tree/master/Help)
-  [Here's a direct link to a sample script](https://github.com/bdamon/MuscleUS_Toolbox/tree/master/Sample-Scripts)
+* [Here's a direct link to a sample script](https://github.com/bdamon/MuscleUS_Toolbox/tree/master/Sample-Scripts)
 * [Here's a direct link to templates for submitting feature requests and bug reports](https://github.com/bdamon/MuscleUS_Toolbox/tree/master/Issues)
 
 ### B. External to the toolbox:
