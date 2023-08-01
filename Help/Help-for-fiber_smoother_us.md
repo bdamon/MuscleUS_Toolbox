@@ -1,4 +1,4 @@
-# Help for the function <i>fiber_smoother_us</i>, v. 0.1.x
+# Help for the function <i>fiber_smoother_us</i>, v. 1.0.0
 
 ## Introduction
 
