@@ -1,4 +1,4 @@
-# Help for the function <i>read_dicom_us</i>, v. 0.1.x
+# Help for the function <i>read_dicom_us</i>, v. 1.0.0
 
 ## Introduction
 
