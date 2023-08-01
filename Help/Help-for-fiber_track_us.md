@@ -13,14 +13,10 @@ This help file contains information about
  
 The function <i>fiber_track_us</i> is used to perform fiber tractography in the MuscleUS_Toolbox.
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md)
-
 ## 2. Usage
 The inputs are derived from previous file opening (i.e, <i>read_dicom_us</i>), ROI definition (<i>define_muscle_roi_us</i>), and image processing (<i>bmode2angle_us</i>) steps, plus a structure defining the fiber-tracking options. This structure allows the user to set the tracking step size and tract termination criteria. Fiber tracking begins at the aponeurosis seed points and continues by using Euler integration of the vectors that are used to describe muscle fascicle orientation. Tracking occurs at a user-defined step size and terminates either due to high inter-point angle or if the tract reaches the muscle boundary, as defined by the image mask. The outputs include a matrix containing fiber tracts, with units of pixels; and a vector containing the reason for fiber tract termination.
 
 The fiber tracts may be viewed using <i>fiber_visualizer_us</i>, either as part of the function call to <i>fiber_track_us</i> or directly from the command line.
-
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md)
 
 ## 3. Syntax
 
@@ -50,8 +46,6 @@ The output arguments are:
 
 * <i>stop_list</i>: A vector containing the reason for tract termination, with 1 = reaching the muscle border, as defined by the mask; and 2 = an excessive inter-point angle 
 
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md)
-
 ## 4. Example Code
 
 % define fiber tracking options:
@@ -80,9 +74,8 @@ fv_options.mask_color=[1 0 1];                                              %mas
 
 % call the function:
 
-[fiber_all, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options, fv_options);
-  
-[Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-fiber_track_us.md)
+[fiber_all_pixels, stop_list] = fiber_track_us(vector_image, roi_struc, image_data_struc, ft_options, fv_options);
+
 
 ## 5. Acknowledgements
  People: Bruce Damon, Hannah Kilpatrick
