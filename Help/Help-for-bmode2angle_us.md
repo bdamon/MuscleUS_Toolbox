@@ -62,13 +62,13 @@ The input arguments are:
    
     <i>.gauss_size</i>: The row x column dimensions of the Gaussian blurring window, in pixels
     
-  Parameters describing the vesselness response calculation:
+  * Parameters describing the vesselness response calculation:
   
     <i>.vessel_beta</i>: The beta value in the vesselness response function
    
     <i>.vessel_c</i>: The C value in the vesselness response function
     
-  Parameters describing the formation of the wavelet and wavelet convolution with the vesselness-filtered image:
+  * Parameters describing the formation of the wavelet and wavelet convolution with the vesselness-filtered image:
   
     <i>.wavelet_damp</i>: The damping coefficient D of the wavelet
    
@@ -84,9 +84,16 @@ The input arguments are:
   
     <i>.num_angles</i>: The number of angles to use when convolving the wavelets with the image
     
-  Parameters describing the averaging over grid squares:
+  * Parameters describing the averaging over grid squares:
   
-    <i>.num_pixels</i>: The size of the grid squares (n), in pixels (i.e., n x n)
+    <i>.num_pixels</i>: A P x 2 matrix defining the grid square sizes to be analyzed. Each row of num_pixels defines the row and column sizes of the grid squares, in pixels (i.e., n x m). The averaging is repeated for each row, p, of num_pixels.
+
+    
+  * Parameters describing the formation of the vesselness mask using either Otsu's method of k-means clustering:
+  
+    <i>.max_angle</i>: The multiplier for Otsu's threshold in the vesselness-masked images, when Otsu's method is used to filter the image. For example, setting b2a_options.otsu to 1 uses the threshold set by Otsu's method.  Setting b2a_options.otsu to 0.5 uses 1/2 of this threshold.
+  
+    <i>.k</i>: A two-element vector with the number of clusters and the ordinal rank, of the cluster to be used, when k-means clustering is used to filter the image
 
 The output arguments are:
 
@@ -97,6 +104,16 @@ The output arguments are:
 * <i>angle_image_grid</i>: The gridded angle image, at the user-defined resolution
 
 * <i>vector_image</i>: The X and Y components of the angles in the gridded image
+
+* vesselness_mask: The mask calculated fromteh vesselness image
+
+* vesselness_max: The maximum vesselness response image
+
+* max_cvn_image: An image showing trhe maximum value of the convolution of wavelet with the pixels
+
+* cvn_images: All of the convolution images
+
+* sample_wavelet: The wavelet use to determine fascicle orientation
 * 
 [Back to the top](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/Help/Help-for-bmode2angle_us.md)
 
