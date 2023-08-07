@@ -64,4 +64,4 @@ At any stage, the results can be visualized using the function [<i>fiber_visuali
 
 ### B. External to the toolbox:
 * Here's the [PubMed link](https://pubmed.ncbi.nlm.nih.gov/19646699/) for the paper with the algorithm for modeling fascicle orientation that we used.
-* Our paper describing this mehtod is in press and will be linked here as soon as the preprint is available.
+* Our paper describing this method is in press in the <i>Journal of Applied Biomechanics</i> and will be linked here as soon as the preprint is available.
