@@ -14,7 +14,7 @@ This help file contains information about
 The function <i>bmode2angle_us</i> is used to estimate muscle fascicle orientations in the MuscleUS_Toolbox.
 
 ## 2. Usage
-The function bmode2angle_us is used to estimate muscle fascicle orientations in the MuscleUS_Toolbox. The user provides a B-mode image, the mask defining the region of interest in the image, and a structure containing options for estimating the fascicle orientations. The fascicle orientations are estimated using an algorithm presented by Rana et al., (J Biomech, 42:2068, 2009), in which the images are processed using
+The function <i>bmode2angle_us</i> is used to estimate muscle fascicle orientations in the MuscleUS_Toolbox. The user provides a B-mode image, the mask defining the region of interest in the image, and a structure containing options for estimating the fascicle orientations. The fascicle orientations are estimated using an algorithm presented by Rana et al., (J Biomech, 42:2068, 2009), in which the images are processed using
 * Vesselness filtering:
   * A series of Gaussian blurring steps with increasing std. deviations for the Gaussian function; for each one, the vesselness response of the structures is calculated.
   * Determination of the maximum vesselness response
@@ -35,6 +35,8 @@ The function returns:
   * A sample wavelet
 
 Angles are specified as a counterclockwise rotation from the right side of the image = 0⁰.
+
+(Hints: 1. Examine the image first to estimate the fascicle orientations.  Make your minimum angle (min_angle) ~10<sup>o</sup> lower than the lowest estimated angle and your maximum angle (max_angle) ~10<sup>o</sup> greater than the lowest estimated angle.  2. Using a higher number of angles (num_angles) and a higher range of angles (max_angle-min_angle) requires more time to model the data. Determine the range and angular resolution that you actually need for your study.  3. Be sure to inspect the output data using the code below (and adapt it to other other output variables). 4. The wavelet and vesselness parameters may vary depending on your image resolution).
 
 ## 3. Syntax
 
