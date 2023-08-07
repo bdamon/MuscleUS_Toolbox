@@ -17,11 +17,13 @@ The function <i>define_muscleroi_us</i> is used to define structures of interest
 ## 2. Usage
 The function <i>define_muscleroi_us</i> is used to define regions of interest in the MuscleUS_Toolbox.
 
-In typical usage, both the boundaries fo the muscle region of interest and the aponeurosis will be defined.  To define the region, the user will use the <i>roipoly</i> function to define the region's boundaries; the user is advised to look at MATLAB's help files on this function. (Hint: Be sure to avoid the inclusion of other fascial tissues within the region, as these will erroneously bias the fascicle orientation estimates). Then the user is prompted to zoom in on the aponeurosis of fascicle insertion, pressing return when done.  The user defines the aponeurosis of fascicle insertion using a series of left mouse clicks; use a right click to end the procedure. (Hint: The aponeurosis must be defined entirely within the region of interest). A 3rd order polynomial curve is fitted to the points and displayed. Evenly spaced points along this curve will become the seed points for fiber-tracking.  The user can define the density (spacing) of these seed points. The user can also input a previously defined mask (if it exists), as a time-saving step to obviate re-defining the muscle boundaries.  
+In typical usage, both the boundaries fo the muscle region of interest and the aponeurosis will be defined.  To define the region, the user will use the <i>roipoly</i> function to define the region's boundaries; the user is advised to look at MATLAB's help files on this function. Then the user is prompted to zoom in on the aponeurosis of fascicle insertion, pressing return when done.  The user defines the aponeurosis of fascicle insertion using a series of left mouse clicks; use a right click to end the procedure. A 3rd order polynomial curve is fitted to the points and displayed. Evenly spaced points along this curve will become the seed points for fiber-tracking.  The user can define the density (spacing) of these seed points. The user can also input a previously defined mask (if it exists), as a time-saving step to obviate re-defining the muscle boundaries.  
 
 After each step, the user can inspect and verify these definitions before advancing. An instruction in the command window will prompt the user.
 
 An updated image data structure and the binary image mask, aponeurosis definition, and other information about the region defined, are output.
+
+(Hints: 1. Be sure to avoid the inclusion of other fascial tissues within the region, as these will erroneously bias the fascicle orientation estimates. 2. The aponeurosis must be defined entirely within the region of interest.).
 
 ## 3. Syntax
 The function define_muscleroi_us is called using the following syntax:
