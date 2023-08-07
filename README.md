@@ -4,7 +4,7 @@
 The MuscleUS_Toolbox consists of a series of custom-written Matlab functions for performing ultrasound fiber tractography in skeletal muscle. This README file contains
   1) [Acknowledgements](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#1-acknowledgements)
   2) [License information](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#2-license-information)
-  3) [A list of MATLAB requirements](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#3-getting-started)
+  3) [Getting started](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#3-getting-started)
   4) [A list of the conventions assumed regarding data acquisition](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#4-data-acquisition-conventions-assumed)
   5) [An overview of a typical workflow using the toolbox](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#5-overview-of-a-typical-workflow)
   6) [Links to other resources in the toolbox and online](https://github.com/bdamon/MuscleUS_Toolbox/blob/master/README.md#6-other-resources)
