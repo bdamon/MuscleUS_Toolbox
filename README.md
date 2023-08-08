@@ -19,7 +19,7 @@ This work is covered under a [GNU General Public License](https://github.com/bda
 
 ## 3. Getting Started
 ### A. Downloading the Toolbox
-The easiest way to do this is to click once on the green Code button. Select the "Download ZIP" option and extract the files to a convenient place on your computer (note that after extracting the files, you will need to set a MATLAB path to the directory that holds the custom-written functions).
+The easiest way to do this is to click once on the green Code button. Select the "Download ZIP" option; this will download a compressed folder to your computer. Then extract the files to a convenient place on your computer (note that after extracting the files, you will need to set a MATLAB path to the directory that holds the custom-written functions).
 
 ### B. MATLAB Requirements
 The functions have been tested using MATLAB v. 2021 b, Release 2.  The toolbox consists primarily of custom-written functions, but also calls MATLAB functions in the base package and the image processing toolbox.
