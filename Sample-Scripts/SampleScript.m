@@ -9,8 +9,8 @@ clc
 [image_data_struc, image_info_struc] = read_dicom_us(); 
 
 % Or this (uncomment and then replace with local path and file names)
-% input_structure.input_path_name = 'S:\Muscle_DTI\Data\Aim 1\Aim 1A\MuscleUS_Toolbox paper\230512_Dataset_Tentative_Selection\6_TA_15degrees_plantarflexion_0101';
-% input_structure.input_file_name = 'M9NG1Q0C';
+% input_structure.input_path_name = 'your local data folder';          %Update with actual path
+% input_structure.input_file_name = 'US_0049__164742';
 % input_structure.output_path_name = input_structure.input_path_name;
 % input_structure.output_file_name = 'ExampleData.mat';
 % input_structure.show_image = 1;                                             %set to 1 to show image
